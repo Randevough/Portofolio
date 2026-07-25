@@ -4,6 +4,6 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://RandDevs.github.io',
-  base: '/Portofolio',
+  base: '/Portofolio/',
   integrations: [sitemap()],
 });

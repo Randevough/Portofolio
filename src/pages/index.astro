@@ -9,6 +9,7 @@ const base = import.meta.env.BASE_URL;
 const heroPoster = `${base}assets/hero-poster.jpg`;
 const heroWebm = `${base}assets/hero-loop.webm`;
 const heroMp4 = `${base}assets/hero-loop.mp4`;
+const codequestRoute = `${base}work/codequest/`;
 ---
 
 <BaseLayout
@@ -106,7 +107,7 @@ const heroMp4 = `${base}assets/hero-loop.mp4`;
 
         <!-- Panel 1: CodeQuest -->
         <article class="panel">
-          <a class="panel__media" href={`${base}work/codequest`} data-pt data-hover="View case">
+          <a class="panel__media" href={codequestRoute} data-pt data-hover="View case">
             <span class="panel__badge mono">Case study</span>
             <img src={`${base}assets/work-codequest.svg`} alt="CodeQuest interface">
           </a>
@@ -119,7 +120,7 @@ const heroMp4 = `${base}assets/hero-loop.mp4`;
               <li><span class="mono">Year</span>2026</li>
               <li><span class="mono">Stack</span>Next.js · Prisma · Supabase · NextAuth · Tailwind</li>
             </ul>
-            <a class="link" href={`${base}work/codequest`} data-pt data-magnetic>Read the case study <span><span class="arw">&#8599;</span></span></a>
+            <a class="link" href={codequestRoute} data-pt data-magnetic>Read the case study <span><span class="arw">&#8599;</span></span></a>
           </div>
         </article>
 
