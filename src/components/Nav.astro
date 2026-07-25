@@ -1,0 +1,52 @@
+---
+interface Props {
+  isCaseStudy?: boolean;
+}
+
+const { isCaseStudy = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const cvPath = `${base}assets/randevough-cv.pdf`;
+const navClass = isCaseStudy ? "nav is-solid" : "nav";
+const indexPrefix = isCaseStudy ? base : "";
+---
+
+<header class={navClass} data-nav>
+  <div class="nav__inner">
+    {isCaseStudy ? (
+      <a class="nav__mark" href={base} data-pt>Randevough</a>
+    ) : (
+      <a class="nav__mark" href="#top">Randevough</a>
+    )}
+    <nav class="nav__links">
+      <a href={`${indexPrefix}#work`}>Work</a>
+      <a href={`${indexPrefix}#services`}>Services</a>
+      <a href={`${indexPrefix}#about`}>About</a>
+      <a href={`${indexPrefix}#experience`}>Experience</a>
+      {!isCaseStudy && <a href="#contact">Contact</a>}
+    </nav>
+    <div class="nav__right">
+      {isCaseStudy ? (
+        <a class="btn" href={`${base}#contact`} data-magnetic><span>Contact</span></a>
+      ) : (
+        <a class="btn" href={cvPath} data-magnetic><span>Resume</span><span><span class="arw">&#8599;</span></span></a>
+      )}
+    </div>
+    {!isCaseStudy && (
+      <button class="nav__burger" data-burger aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+    )}
+  </div>
+</header>
+
+{!isCaseStudy && (
+  <div class="navmenu" data-navmenu>
+    <a href="#work"><span>01</span>Work</a>
+    <a href="#services"><span>02</span>Services</a>
+    <a href="#about"><span>03</span>About</a>
+    <a href="#experience"><span>04</span>Experience</a>
+    <a href="#contact"><span>05</span>Contact</a>
+    <div class="navmenu__foot">
+      <a href="mailto:randdevs54@gmail.com">randdevs54@gmail.com</a>
+      <a href={cvPath}>Resume <span class="arw">&#8599;</span></a>
+    </div>
+  </div>
+)}

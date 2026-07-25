@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="CodeQuest — Case study · Randevough"
+  description="How I designed and shipped CodeQuest, a gamified learning platform for a campus coding community."
+  isCaseStudy={true}
+>
+  <main id="top">
+    <section class="cs">
+      <a class="cs__back" href={`${base}#work`}><span><span class="arw arw--left">&#8592;</span></span> All work</a>
+      <h1 class="cs__title" data-split>CodeQuest</h1>
+      <p class="cs__lede" data-fade>A gamified learning platform for a campus coding community &mdash; built solo, from database schema to production deploy.</p>
+
+      <div class="cs__meta">
+        <div data-fade><span>Role</span>Solo developer</div>
+        <div data-fade style="--d:70ms"><span>Year</span>2026</div>
+        <div data-fade style="--d:140ms"><span>Stack</span>Next.js · Prisma · Supabase · NextAuth · Tailwind</div>
+        <div data-fade style="--d:210ms"><span>Status</span>In production</div>
+      </div>
+
+      <div class="cs__hero" data-fade><img src={`${base}assets/work-codequest.svg`} alt="CodeQuest interface overview"></div>
+    </section>
+
+    <section class="cs__body">
+
+      <div class="cs__block">
+        <h2><small>01</small>Context</h2>
+        <div>
+          <p data-fade>UKM Coding at Cyber University runs learning programs for members at wildly different levels &mdash; some have never written a line, some already ship side projects. Material lived in scattered documents, submissions came in over chat, and progress existed only in whoever happened to remember it.</p>
+          <p data-fade>The community needed one place where a member could see what to learn next, submit work, and have that work actually recorded.</p>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>02</small>The problem</h2>
+        <div>
+          <p data-fade>The obvious version of this product is a course website. That would have failed for the same reason the documents failed: <strong>nothing made anyone come back.</strong></p>
+          <p data-fade>The real problem wasn't storage. It was retention and visibility &mdash; members dropping off after week two, and mentors having no way to see who was stuck without asking everyone individually.</p>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>03</small>Approach</h2>
+        <div>
+          <ul class="cs__list">
+            <li data-fade><strong>Modelled progress before designing screens.</strong> Courses, modules, submissions, and attempts became first-class tables in Prisma. Every interface after that was just a view over a schema that already made sense &mdash; which is why adding features later didn't require migrations.</li>
+            <li data-fade><strong>Role-based access from day one.</strong> Member, mentor, and admin were built into the auth layer through NextAuth rather than bolted on. Retrofitting permissions is the single most expensive mistake in a platform like this.</li>
+            <li data-fade><strong>Made progress visible, not just stored.</strong> Completion state surfaces on every entry point, so a returning member never has to remember where they left off. This is the part that changed behaviour.</li>
+            <li data-fade><strong>Server components by default.</strong> Course and module pages render on the server so first load stays fast on campus wifi. Client interactivity is scoped to the pieces that genuinely need it.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>04</small>Interface</h2>
+        <div>
+          <div class="cs__shots">
+            <figure data-fade><img src={`${base}assets/shot-1.svg`} alt="Course dashboard"><figcaption>Dashboard &mdash; next action surfaced first</figcaption></figure>
+            <figure data-fade style="--d:80ms"><img src={`${base}assets/shot-2.svg`} alt="Module view"><figcaption>Module view &mdash; content and submission side by side</figcaption></figure>
+            <figure data-fade style="--d:160ms"><img src={`${base}assets/shot-3.svg`} alt="Mentor review queue"><figcaption>Mentor queue &mdash; who is stuck, at a glance</figcaption></figure>
+            <figure data-fade style="--d:240ms"><img src={`${base}assets/shot-4.svg`} alt="Admin panel"><figcaption>Admin &mdash; course authoring</figcaption></figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>05</small>Outcome</h2>
+        <div>
+          <p data-fade>CodeQuest is in production and is now the default place the community runs its programs. Material, submissions, and progress live in one system instead of three, and mentors can see where people are stuck without chasing them.</p>
+          <p data-fade>The part I'd defend hardest: the schema hasn't needed a rewrite. Every feature added after launch fit the model that was there on day one.</p>
+          <p data-fade><em style="color:var(--muted);font-style:normal">Placeholder &mdash; replace with real numbers once you have them: active members, submissions processed, completion rate.</em></p>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="cs__next">
+      <a href={`${base}#work`} data-magnetic>
+        <div><span class="mono">Next</span><br><strong>Smart Parking</strong></div>
+        <span><span class="arw arw--right">&#8594;</span></span>
+      </a>
+    </div>
+  </main>
+</BaseLayout>

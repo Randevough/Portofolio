@@ -1,0 +1,68 @@
+---
+import TextureLayers from '../components/TextureLayers.astro';
+import Loader from '../components/Loader.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import SectionRail from '../components/SectionRail.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  showLoader?: boolean;
+  isCaseStudy?: boolean;
+  showRail?: boolean;
+}
+
+const {
+  title,
+  description,
+  showLoader = false,
+  isCaseStudy = false,
+  showRail = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta name="theme-color" content="#0A0A0A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script is:inline>
+(function(){var d=document.documentElement,c=[];
+try{
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)c.push('motion');
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches)c.push('fine');
+}catch(e){}
+if(c.length)d.className=(d.className+' '+c.join(' ')).trim();})();
+</script>
+</head>
+<body>
+
+<div class="pt" data-pt-curtain aria-hidden="true"><span class="pt__mark">Randevough</span></div>
+<TextureLayers />
+
+{showLoader && <Loader />}
+<div class="cursor" data-cursor aria-hidden="true"><span class="cursor__label" data-cursor-label></span></div>
+
+<Nav isCaseStudy={isCaseStudy} />
+
+<slot />
+
+{showRail && <SectionRail />}
+{!isCaseStudy && <div class="footspacer" data-footspacer></div>}
+
+<Footer lean={isCaseStudy} />
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="../scripts/main.ts"></script>
+</body>
+</html>

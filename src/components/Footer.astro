@@ -1,0 +1,51 @@
+---
+interface Props {
+  lean?: boolean;
+}
+
+const { lean = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const cvPath = `${base}assets/randevough-cv.pdf`;
+const codequestPath = `${base}work/codequest`;
+---
+
+{lean ? (
+  <footer class="foot foot--lean">
+    <div class="foot__inner mono">
+      <span>&copy; 2026 Randevough</span>
+      <span>Jakarta, ID</span>
+      <a href={base} data-pt>Back to the index</a>
+      <a href="#top">Back to top <span class="arw arw--up">&#8593;</span></a>
+    </div>
+  </footer>
+) : (
+  <footer class="foot" data-foot>
+    <div class="foot__inner">
+      <div class="foot__lead">
+        <span class="foot__status mono">Available for freelance &amp; internships</span>
+        <p class="foot__note">Tell me what you are building and when you need it live. I reply within one working day, and I will tell you straight if it is not a good fit.</p>
+      </div>
+      <div class="foot__cols">
+        <div class="foot__col">
+          <h3 class="mono">Pages</h3>
+          <a href="#work">Selected work</a>
+          <a href="#services">Services</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="foot__col">
+          <h3 class="mono">Documents</h3>
+          <a href={cvPath} download>Curriculum vitae (PDF)</a>
+          <a href={codequestPath} data-pt>CodeQuest case study</a>
+          <a href="https://github.com/randevough" target="_blank" rel="noopener">Source &amp; side projects</a>
+        </div>
+      </div>
+    </div>
+    <span class="foot__word" aria-hidden="true">Randevough</span>
+
+    <div class="foot__bar mono">
+      <span>&copy; 2026 Randevough &mdash; Jakarta, ID</span>
+      <a href="#top">Back to top <span class="arw arw--up">&#8593;</span></a>
+    </div>
+  </footer>
+)}

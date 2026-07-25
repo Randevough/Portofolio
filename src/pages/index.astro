@@ -1,0 +1,342 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const workItems = await getCollection('work');
+workItems.sort((a, b) => a.data.order - b.data.order);
+
+const base = import.meta.env.BASE_URL;
+const heroPoster = `${base}assets/hero-poster.jpg`;
+const heroWebm = `${base}assets/hero-loop.webm`;
+const heroMp4 = `${base}assets/hero-loop.mp4`;
+---
+
+<BaseLayout
+  title="Randevough — Full-stack Developer"
+  description="Full-stack developer building web products that ship fast and hold up in production. Available for freelance projects and internships."
+  showLoader={true}
+  showRail={true}
+>
+  <main id="top">
+
+  <!-- ============ 01 HERO ============ -->
+  <section class="hero">
+    <div class="hero__inner">
+      <p class="hero__eyebrow mono" data-fade>Full-stack developer &mdash; Jakarta, ID</p>
+
+      <div class="hero__mask">
+        <video class="hero__video" data-hero-video autoplay muted loop playsinline preload="auto" poster={heroPoster} aria-hidden="true">
+          <source src={heroWebm} type="video/webm">
+          <source src={heroMp4} type="video/mp4">
+        </video>
+        <h1 class="hero__title" data-hero-title>
+          <span class="hero__line"><span>I build web products</span></span>
+          <span class="hero__line"><span>that ship fast and</span></span>
+          <span class="hero__line"><span>hold up in production.</span></span>
+        </h1>
+      </div>
+
+      <div class="hero__foot">
+        <p class="hero__lede" data-fade>Independent developer working with founders and teams on web applications, product interfaces, and the systems behind them. Currently open to freelance projects and internships.</p>
+        <div class="hero__actions" data-fade>
+          <a class="btn btn--solid" href="#work" data-magnetic><span>Selected work</span></a>
+          <a class="btn" href="#contact" data-magnetic><span>Start a project</span><span><span class="arw">&#8599;</span></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__meta mono" data-fade>
+      <span>Est. 2021</span>
+      <span data-clock>--:--:-- WIB</span>
+      <span class="hero__scroll">Scroll <i></i></span>
+    </div>
+  </section>
+
+  <!-- ============ 02 MARQUEE ============ -->
+  <section class="marquee" data-marquee aria-hidden="true">
+    <div class="marquee__track" data-marquee-track>
+      <span>Full-stack development</span><i>&#9679;</i>
+      <span>Next.js &amp; React</span><i>&#9679;</i>
+      <span>API &amp; database design</span><i>&#9679;</i>
+      <span>Product engineering</span><i>&#9679;</i>
+      <span>IoT integration</span><i>&#9679;</i>
+      <span>Performance</span><i>&#9679;</i>
+    </div>
+  </section>
+
+  <!-- ============ 03 STATEMENT ============ -->
+  <section class="statement" data-skew>
+    <span class="statement__mark mono" data-fade>Four projects</span>
+    <p class="statement__text" data-split>One rule: it has to survive contact with real users.</p>
+  </section>
+
+  <!-- ============ 04 HOW I WORK ============ -->
+  <section class="how" data-skew>
+    <p class="section__note mono" data-fade style="text-align:left;padding:0 0 clamp(20px,3vh,34px)">How I work</p>
+    <ul class="how__list">
+      <li class="how__item" data-fade>
+        <span class="how__num">01</span>
+        <h3 class="how__title">Model the data before the screens</h3>
+        <p class="how__body">Tables, roles, and permissions come first. Every interface after that is a view over something that already makes sense &mdash; which is why features added in month four don't turn into migrations.</p>
+      </li>
+      <li class="how__item" data-fade style="--d:80ms">
+        <span class="how__num">02</span>
+        <h3 class="how__title">Ship weekly, demo weekly</h3>
+        <p class="how__body">You get a link, not a status update. Scope stays fixed and direction stays correctable, so nobody discovers a misunderstanding in week six.</p>
+      </li>
+      <li class="how__item" data-fade style="--d:160ms">
+        <span class="how__num">03</span>
+        <h3 class="how__title">The boring parts decide month three</h3>
+        <p class="how__body">Error states, empty states, bad connections, and the person who has to edit this after me. That is the whole distance between a demo and something in production.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ 05 WORK ============ -->
+  <section class="work" id="work">
+    <div class="work__head">
+      <div class="section__head">
+        <span class="section__num mono">01</span>
+        <h2 class="section__title" data-split>Selected work</h2>
+        <p class="section__note mono" data-fade>Four projects &mdash; 2023 to 2026</p>
+      </div>
+    </div>
+
+    <div class="work__pin" data-work-pin>
+      <div class="work__track" data-work-track>
+
+        <!-- Panel 1: CodeQuest -->
+        <article class="panel">
+          <a class="panel__media" href={`${base}work/codequest`} data-pt data-hover="View case">
+            <span class="panel__badge mono">Case study</span>
+            <img src={`${base}assets/work-codequest.svg`} alt="CodeQuest interface">
+          </a>
+          <div class="panel__body">
+            <span class="panel__index mono">01 / Web application</span>
+            <h3 class="panel__title">CodeQuest</h3>
+            <p class="panel__desc">A gamified learning platform for a campus coding community. Course structure, submissions, progress tracking, and role-based access &mdash; built and shipped solo.</p>
+            <ul class="panel__facts">
+              <li><span class="mono">Role</span>Solo developer</li>
+              <li><span class="mono">Year</span>2026</li>
+              <li><span class="mono">Stack</span>Next.js · Prisma · Supabase · NextAuth · Tailwind</li>
+            </ul>
+            <a class="link" href={`${base}work/codequest`} data-pt data-magnetic>Read the case study <span><span class="arw">&#8599;</span></span></a>
+          </div>
+        </article>
+
+        <!-- Panel 2: Smart Parking -->
+        <article class="panel">
+          <a class="panel__media" href="#" data-hover="Soon">
+            <img src={`${base}assets/work-parking.svg`} alt="Smart Parking dashboard">
+          </a>
+          <div class="panel__body">
+            <span class="panel__index mono">02 / IoT</span>
+            <h3 class="panel__title">Smart Parking</h3>
+            <p class="panel__desc">Sensor-driven parking availability system. ESP32 nodes reporting slot state to a live dashboard, with the firmware and the interface designed against the same data model.</p>
+            <ul class="panel__facts">
+              <li><span class="mono">Role</span>Team &mdash; firmware &amp; dashboard</li>
+              <li><span class="mono">Year</span>2025</li>
+              <li><span class="mono">Stack</span>ESP32 · C++ · Blynk · Web dashboard</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Panel 3: School Connect -->
+        <article class="panel">
+          <a class="panel__media" href="#" data-hover="Soon">
+            <img src={`${base}assets/work-artakarsa.svg`} alt="Artakarsa School Connect">
+          </a>
+          <div class="panel__body">
+            <span class="panel__index mono">03 / Web application</span>
+            <h3 class="panel__title">School Connect</h3>
+            <p class="panel__desc">A school information platform connecting staff, students, and parents. Focused on getting the permission model right before writing a single screen.</p>
+            <ul class="panel__facts">
+              <li><span class="mono">Role</span>Team &mdash; frontend</li>
+              <li><span class="mono">Year</span>2025</li>
+              <li><span class="mono">Stack</span>React · REST APIs · MySQL</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Panel 4: SongUnlocked -->
+        <article class="panel">
+          <a class="panel__media" href="#" data-hover="Soon">
+            <img src={`${base}assets/work-songunlocked.svg`} alt="SongUnlocked">
+          </a>
+          <div class="panel__body">
+            <span class="panel__index mono">04 / Web app</span>
+            <h3 class="panel__title">SongUnlocked</h3>
+            <p class="panel__desc">A small, fast music discovery app. Built to see how far a single-purpose interface can go when nothing unnecessary is added to it.</p>
+            <ul class="panel__facts">
+              <li><span class="mono">Role</span>Solo developer</li>
+              <li><span class="mono">Year</span>2024</li>
+              <li><span class="mono">Stack</span>Next.js · TypeScript · PWA</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+
+    <div class="work__rail">
+      <span class="work__hint mono">Scroll</span>
+      <div class="work__bar"><i data-work-bar></i></div>
+      <span class="work__hint mono" data-work-count>01 / 04</span>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 SERVICES ============ -->
+  <section class="section services" id="services" data-skew>
+    <div class="section__head">
+      <span class="section__num mono">02</span>
+      <h2 class="section__title" data-split>What I can build for you</h2>
+      <p class="section__note mono" data-fade>Fixed scope. Clear deliverables. No retainer games.</p>
+    </div>
+
+    <div class="svc">
+      <div class="svc__card" data-fade>
+        <span class="svc__num mono">S01</span>
+        <h3>Web application</h3>
+        <p>A full product, schema to deploy. Auth, database, admin, and the boring parts that decide whether it survives month three.</p>
+        <ul>
+          <li>Next.js app, typed end to end</li>
+          <li>Database design + auth</li>
+          <li>Admin panel</li>
+          <li>Deploy pipeline + handover doc</li>
+        </ul>
+        <span class="svc__meta mono">3&ndash;6 weeks</span>
+      </div>
+      <div class="svc__card" data-fade>
+        <span class="svc__num mono">S02</span>
+        <h3>Marketing site</h3>
+        <p>A landing page or company site that loads fast, reads well, and doesn't need a developer every time the copy changes.</p>
+        <ul>
+          <li>Design + build</li>
+          <li>CMS so you can edit it</li>
+          <li>SEO + analytics wired in</li>
+          <li>90+ Lighthouse, or I keep working</li>
+        </ul>
+        <span class="svc__meta mono">1&ndash;2 weeks</span>
+      </div>
+      <div class="svc__card" data-fade>
+        <span class="svc__num mono">S03</span>
+        <h3>IoT &amp; dashboards</h3>
+        <p>Hardware that reports somewhere useful. Firmware, data pipeline, and the interface that makes the readings mean something.</p>
+        <ul>
+          <li>ESP32 / Arduino firmware</li>
+          <li>Data pipeline + storage</li>
+          <li>Live monitoring dashboard</li>
+          <li>Wiring diagram + docs</li>
+        </ul>
+        <span class="svc__meta mono">2&ndash;4 weeks</span>
+      </div>
+    </div>
+
+    <ol class="process" data-fade>
+      <li><span class="mono">01</span><strong>Call</strong>We define the actual problem, not the feature list.</li>
+      <li><span class="mono">02</span><strong>Scope</strong>Fixed price, fixed deliverables, written down.</li>
+      <li><span class="mono">03</span><strong>Build</strong>Weekly demo links. You see it move.</li>
+      <li><span class="mono">04</span><strong>Handover</strong>Deployed, documented, yours.</li>
+    </ol>
+  </section>
+
+  <!-- ============ 07 ABOUT ============ -->
+  <section class="section about" id="about" data-skew>
+    <div class="section__head">
+      <span class="section__num mono">03</span>
+      <h2 class="section__title" data-split>About</h2>
+    </div>
+    <div class="about__grid">
+      <p class="about__lead" data-fade>I started with network cables and ended up writing software.</p>
+      <div class="about__body">
+        <p data-fade>My first real technical work was network infrastructure &mdash; an internship at PUSHANSIBER during my SMK TKJ track, spent tracing why things broke. That habit stuck. I moved into software because I wanted to build the thing, not just keep it running, and the debugging instinct came with me.</p>
+        <p data-fade>Now I'm an Informatics student at Cyber University and I lead its coding community, which mostly means shipping under real deadlines with people who are still learning. I work full-stack, lean heavily on Next.js and Postgres, and still take IoT work when a project needs something physical to happen.</p>
+        <p data-fade>I care about the parts nobody screenshots: data models that don't need rewriting, states that are actually handled, pages that load on a bad connection.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 EXPERIENCE ============ -->
+  <section class="section exp" id="experience" data-skew>
+    <div class="section__head">
+      <span class="section__num mono">04</span>
+      <h2 class="section__title" data-split>Experience</h2>
+      <p class="section__note mono" data-fade>Hover a row for detail</p>
+    </div>
+    <div class="rows" data-rows></div>
+  </section>
+
+  <!-- ============ 09 STACK ============ -->
+  <section class="section stack" id="stack">
+    <div class="section__head">
+      <span class="section__num mono">05</span>
+      <h2 class="section__title" data-split>Stack</h2>
+      <p class="section__note mono" data-fade>Hover a tool &mdash; see where it shipped</p>
+    </div>
+    <div class="stack__wrap">
+      <div class="stack__list" data-stack></div>
+      <aside class="stack__proof">
+        <h3>Evidence</h3>
+        <ul class="proof" data-proof></ul>
+        <p class="stack__hint" data-stack-hint>All tools</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ 10 CONTACT ============ -->
+  <section class="section contact" id="contact" data-skew>
+    <div class="contact__top">
+      <span class="section__num mono">06</span>
+      <h2 class="contact__title" data-contact-title>
+        <span class="hero__line"><span>Let's build</span></span>
+        <span class="hero__line"><span>something solid.</span></span>
+      </h2>
+    </div>
+    <div class="contact__grid">
+      <div class="contact__left">
+        <a class="contact__mail" href="mailto:randdevs54@gmail.com" data-magnetic>randdevs54@gmail.com</a>
+        <p class="contact__note" data-fade>Tell me what you're building and when you need it. I reply within a day.</p>
+        <div class="contact__socials">
+          <a href="https://github.com/randevough" target="_blank" rel="noopener">GitHub <span><span class="arw">&#8599;</span></span></a>
+          <a href="https://www.linkedin.com/in/randevough" target="_blank" rel="noopener">LinkedIn <span><span class="arw">&#8599;</span></span></a>
+          <a href="https://wa.me/62XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp <span><span class="arw">&#8599;</span></span></a>
+          <a href="https://instagram.com/randevough" target="_blank" rel="noopener">Instagram <span><span class="arw">&#8599;</span></span></a>
+        </div>
+      </div>
+
+      <form class="cform" data-cform action="https://api.web3forms.com/submit" method="POST" novalidate>
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+        <input type="checkbox" name="botcheck" class="cform__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="field" data-field>
+          <input id="f-name" name="name" type="text" placeholder=" " required autocomplete="name">
+          <label for="f-name">Name</label>
+          <span class="field__line"></span>
+          <span class="field__err">Required</span>
+        </div>
+
+        <div class="field" data-field>
+          <input id="f-mail" name="email" type="email" placeholder=" " required autocomplete="email">
+          <label for="f-mail">Email</label>
+          <span class="field__line"></span>
+          <span class="field__err">Check the address</span>
+        </div>
+
+        <div class="field" data-field>
+          <textarea id="f-msg" name="message" rows="4" placeholder=" " required maxlength="600" data-counter></textarea>
+          <label for="f-msg">What are you building?</label>
+          <span class="field__line"></span>
+          <span class="field__count" data-count>0 / 600</span>
+        </div>
+
+        <div class="cform__foot">
+          <button class="send" type="submit" data-send data-magnetic>
+            <span data-send-label>Send message</span><i></i>
+          </button>
+          <p class="cform__status mono" data-cform-status role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  </main>
+</BaseLayout>
