@@ -3,3 +3,8 @@ dist/
 .astro/
 .DS_Store
 .env*
+
+# Exclude CV profiles and personal resume working files
+CV_PROFILE.md
+*CV_PROFILE*
+*cv_profile*
