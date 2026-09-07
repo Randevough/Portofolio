@@ -43,7 +43,7 @@ npm run preview
 1. Any push to the `main` branch triggers `.github/workflows/deploy.yml`.
 2. The GitHub Actions workflow uses `withastro/action` to build the static site.
 3. Built files in `dist/` are automatically published to GitHub Pages via `actions/deploy-pages`.
-4. The site is hosted under the repository subpath: `https://RandDevs.github.io/Portofolio/`.
+4. The site is hosted under the repository subpath: `https://randevough.github.io/Portofolio/`.
 
 > **Repository Configuration Note**: Ensure **Settings → Pages → Source** on GitHub is set to **GitHub Actions**.
 
