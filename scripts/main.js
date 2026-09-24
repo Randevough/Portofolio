@@ -27,52 +27,52 @@
      DATA
      --------------------------------------------------------------- */
   var PROOF = [
-    { id: 'codequest',   name: 'CodeQuest',      meta: 'Web app · 2026' },
-    { id: 'parking',     name: 'Smart Parking',  meta: 'IoT · 2025' },
-    { id: 'school',      name: 'School Connect', meta: 'Web app · 2025' },
-    { id: 'song',        name: 'SongUnlocked',   meta: 'Web app · 2024' },
-    { id: 'jakartahitz', name: 'JakartaHitz',    meta: 'Web dev · 2024' },
-    { id: 'ukm',         name: 'UKM Coding',     meta: 'Lead · 2025' },
-    { id: 'ngoepi',      name: 'NGOEPI',         meta: 'Teaching · 2023' },
-    { id: 'pushansiber', name: 'PUSHANSIBER',    meta: 'Network · 2022' }
+    { id: 'codequest',   name: 'CodeQuest',          meta: 'Platform · 2026' },
+    { id: 'aksaranetra', name: 'AksaraNetra',        meta: 'Audit engine · 2025' },
+    { id: 'ukm',         name: 'UKM Coding',         meta: 'Editorial CMS · 2025' },
+    { id: 'andalasia',   name: 'Andalasia Creative', meta: 'Agency site · 2024' },
+    { id: 'robonetra',   name: 'Robonetra',          meta: 'Assistive IoT · 2024' },
+    { id: 'jakartahitz', name: 'JakartaHitz',        meta: 'Web dev · 2024' },
+    { id: 'ngoepi',      name: 'NGOEPI',             meta: 'Teaching · 2023' },
+    { id: 'pushansiber', name: 'PUSHANSIBER',        meta: 'Network · 2022' }
   ];
 
   var STACK = [
-    { n: 'TypeScript',   key: 1, p: ['codequest', 'song', 'jakartahitz'] },
-    { n: 'React',        key: 1, p: ['codequest', 'school', 'song', 'jakartahitz', 'ngoepi'] },
-    { n: 'Next.js',      key: 1, p: ['codequest', 'song', 'ukm'] },
-    { n: 'Node.js',      key: 0, p: ['codequest', 'school'] },
+    { n: 'TypeScript',   key: 1, p: ['codequest', 'aksaranetra', 'ukm', 'jakartahitz'] },
+    { n: 'React',        key: 1, p: ['codequest', 'ukm', 'andalasia', 'jakartahitz', 'ngoepi'] },
+    { n: 'Next.js',      key: 1, p: ['codequest', 'aksaranetra'] },
+    { n: 'Astro',        key: 1, p: ['ukm'] },
+    { n: 'Node.js',      key: 0, p: ['codequest', 'aksaranetra'] },
     { n: 'Prisma',       key: 1, p: ['codequest'] },
     { n: 'PostgreSQL',   key: 1, p: ['codequest'] },
-    { n: 'MySQL',        key: 0, p: ['school'] },
     { n: 'Supabase',     key: 0, p: ['codequest'] },
-    { n: 'Tailwind CSS', key: 1, p: ['codequest', 'song', 'jakartahitz'] },
-    { n: 'REST APIs',    key: 0, p: ['school', 'parking', 'jakartahitz'] },
+    { n: 'Tailwind CSS', key: 1, p: ['codequest', 'andalasia', 'jakartahitz'] },
+    { n: 'Sanity CMS',   key: 0, p: ['ukm'] },
     { n: 'NextAuth',     key: 0, p: ['codequest'] },
-    { n: 'Git',          key: 0, p: ['codequest', 'parking', 'school', 'song', 'ukm'] },
-    { n: 'Vercel',       key: 0, p: ['codequest', 'song'] },
-    { n: 'Figma',        key: 0, p: ['codequest', 'school', 'ngoepi'] },
-    { n: 'Linux',        key: 0, p: ['pushansiber', 'codequest'] },
-    { n: 'ESP32',        key: 1, p: ['parking'] },
-    { n: 'Arduino',      key: 0, p: ['parking'] },
-    { n: 'C / C++',      key: 0, p: ['parking'] },
+    { n: 'Playwright',   key: 0, p: ['aksaranetra'] },
+    { n: 'Git',          key: 0, p: ['codequest', 'aksaranetra', 'ukm', 'andalasia'] },
+    { n: 'Vercel',       key: 0, p: ['codequest', 'aksaranetra'] },
+    { n: 'Figma',        key: 0, p: ['codequest', 'ukm', 'ngoepi'] },
+    { n: 'Linux',        key: 0, p: ['pushansiber', 'codequest', 'aksaranetra'] },
+    { n: 'Arduino',      key: 0, p: ['robonetra'] },
+    { n: 'C / C++',      key: 0, p: ['robonetra'] },
     { n: 'MikroTik',     key: 0, p: ['pushansiber'] },
-    { n: 'Networking',   key: 0, p: ['pushansiber', 'parking'] }
+    { n: 'Networking',   key: 0, p: ['pushansiber'] }
   ];
 
   var ROLES = [
-    { year: '2025 — Now', role: 'Ketua UKM Coding', org: 'Cyber University', tag: 'Current',
-      detail: 'Leading the campus coding community: curriculum, internal projects, and getting members to ship something real instead of watching tutorials.' },
-    { year: '2024 — 2025', role: 'Web Developer', org: 'JakartaHitz · MillenialNews Group', tag: 'Professional',
-      detail: 'Built and maintained production web pages for a media brand — fast loads, editable content, and layouts that survive real editorial traffic.' },
+    { year: '2025 – Present', role: 'Ketua UKM Coding', org: 'Cyber University', tag: 'Current',
+      detail: 'Leads the university coding club of 50+ members: develops curriculum roadmaps, coordinates project repositories, and mentors students through full-stack web builds.' },
+    { year: '2024 – 2025', role: 'Web Developer', org: 'JakartaHitz · MillenialNews Group', tag: 'Production',
+      detail: 'Developed and maintained responsive web layouts for an active digital news portal, optimizing asset delivery and page performance for high daily mobile traffic.' },
     { year: '2024', role: 'Wakil Ketua UKM Coding', org: 'Cyber University', tag: 'Leadership',
-      detail: 'Ran the program side of the community: scheduling, mentoring pairs, and keeping internal projects unblocked.' },
-    { year: '2024', role: 'Ketua Pelaksana DECOMPE 4.0', org: 'ASEAN UI/UX Competition', tag: 'Leadership',
-      detail: 'Led the organizing committee for an international UI/UX competition with around 51 participants — timeline, judging flow, and logistics.' },
+      detail: 'Coordinated workshop schedules, monitored project milestones, and organized pair-programming sessions between senior mentors and beginners.' },
+    { year: '2024', role: 'Ketua Pelaksana DECOMPE 4.0', org: 'ASEAN UI/UX Competition', tag: 'Management',
+      detail: 'Chaired the organizing committee for an international design competition with 51 participants, overseeing event operations, judging criteria, and schedule execution.' },
     { year: '2023', role: 'Frontend Instructor', org: 'NGOEPI', tag: 'Teaching',
-      detail: 'Taught five sessions of frontend fundamentals — layout, state, and the habits that stop beginners from painting themselves into a corner.' },
-    { year: '2022 — 2023', role: 'Network Engineer Intern', org: 'PUSHANSIBER · Kemhan RI', tag: 'Start',
-      detail: 'Network infrastructure work during my SMK TKJ track. Configuration, monitoring, and tracing faults — where the debugging instinct came from.' }
+      detail: 'Taught a five-part practical workshop series on responsive HTML/CSS layouts, JavaScript DOM APIs, and state management fundamentals.' },
+    { year: '2022 – 2023', role: 'Network Engineer Intern', org: 'PUSHANSIBER · Kemhan RI', tag: 'Infrastructure',
+      detail: 'Supported enterprise network operations: configured MikroTik routers and switches, monitored packet health, and diagnosed hardware connectivity issues.' }
   ];
 
   /* ---------------------------------------------------------------
