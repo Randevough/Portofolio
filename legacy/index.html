@@ -78,11 +78,12 @@ if(c.length)d.className=(d.className+' '+c.join(' ')).trim();})();
   <div class="hero__inner">
     <p class="hero__eyebrow mono" data-fade>Full-stack developer &mdash; Jakarta, ID</p>
 
-    <div class="hero__mask">
-      <video class="hero__video" data-hero-video autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" aria-hidden="true">
+    <div class="hero__mask" data-hero-mask>
+      <video class="hero__video-source" data-hero-video autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" aria-hidden="true">
         <source src="assets/hero-loop.webm" type="video/webm">
         <source src="assets/hero-loop.mp4" type="video/mp4">
       </video>
+      <canvas class="hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
       <h1 class="hero__title" data-hero-title>
         <span class="hero__line"><span>I build web products</span></span>
         <span class="hero__line"><span>that ship fast and</span></span>

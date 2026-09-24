@@ -455,13 +455,117 @@
   }
 
   /* ---------------------------------------------------------------
-     HERO VIDEO
+     HERO VIDEO TEXT CLIPPING ENGINE (True Canvas 2D source-in masking)
      --------------------------------------------------------------- */
+  var heroMask = $('[data-hero-mask]');
   var heroVideo = $('[data-hero-video]');
-  if (heroVideo) {
-    var play = heroVideo.play();
-    if (play && play.catch) play.catch(function () { /* poster carries it */ });
-    heroVideo.addEventListener('error', function () { heroVideo.style.display = 'none'; });
+  var heroCanvas = $('[data-hero-canvas]');
+  var heroTitleEl = $('[data-hero-title]');
+
+  if (heroMask && heroVideo && heroCanvas && heroTitleEl) {
+    var ctx = heroCanvas.getContext('2d', { alpha: true });
+    var lineSpans = Array.from(heroTitleEl.querySelectorAll('.hero__line > span'));
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var isCanvasReady = false;
+
+    var resizeCanvas = function () {
+      if (!heroMask || !heroCanvas) return;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var rect = heroMask.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      heroCanvas.width = Math.round(rect.width * dpr);
+      heroCanvas.height = Math.round(rect.height * dpr);
+      heroCanvas.style.width = rect.width + 'px';
+      heroCanvas.style.height = rect.height + 'px';
+    };
+
+    var renderMask = function () {
+      var context = ctx;
+      if (!context || !heroMask || !heroCanvas || !heroVideo || !heroTitleEl) return;
+      var cWidth = heroCanvas.width / dpr;
+      var cHeight = heroCanvas.height / dpr;
+
+      if (cWidth === 0 || cHeight === 0) {
+        requestAnimationFrame(renderMask);
+        return;
+      }
+
+      context.save();
+      context.scale(dpr, dpr);
+      context.clearRect(0, 0, cWidth, cHeight);
+
+      // 1. Draw Text as Destination Mask
+      var maskRect = heroMask.getBoundingClientRect();
+      for (var i = 0; i < lineSpans.length; i++) {
+        var span = lineSpans[i];
+        var spanRect = span.getBoundingClientRect();
+        var style = window.getComputedStyle(span);
+        var text = span.textContent || '';
+
+        context.save();
+        context.font = style.fontWeight + ' ' + style.fontSize + ' ' + style.fontFamily;
+        context.fillStyle = '#ffffff';
+        context.textBaseline = 'top';
+        if ('letterSpacing' in context) {
+          context.letterSpacing = style.letterSpacing;
+        }
+
+        var x = spanRect.left - maskRect.left;
+        var y = spanRect.top - maskRect.top;
+        context.fillText(text, x, y);
+        context.restore();
+      }
+
+      // 2. Composite Video into Text only (source-in)
+      if (heroVideo.readyState >= 2) {
+        context.globalCompositeOperation = 'source-in';
+
+        var vw = heroVideo.videoWidth || 16;
+        var vh = heroVideo.videoHeight || 9;
+        var videoRatio = vw / vh;
+        var canvasRatio = cWidth / cHeight;
+        var drawW, drawH, drawX, drawY;
+
+        if (canvasRatio > videoRatio) {
+          drawW = cWidth * 1.1;
+          drawH = drawW / videoRatio;
+          drawX = (cWidth - drawW) / 2;
+          drawY = (cHeight - drawH) / 2;
+        } else {
+          drawH = cHeight * 1.1;
+          drawW = drawH * videoRatio;
+          drawX = (cWidth - drawW) * 0.38;
+          drawY = (cHeight - drawH) / 2;
+        }
+
+        context.drawImage(heroVideo, drawX, drawY, drawW, drawH);
+        context.globalCompositeOperation = 'source-over';
+
+        if (!isCanvasReady) {
+          isCanvasReady = true;
+          heroMask.classList.add('is-canvas-ready');
+        }
+      }
+
+      context.restore();
+      requestAnimationFrame(renderMask);
+    };
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    if ('fonts' in document) {
+      document.fonts.ready.then(function () {
+        resizeCanvas();
+      });
+    }
+
+    var playPromise = heroVideo.play();
+    if (playPromise && playPromise.catch) {
+      playPromise.catch(function () {});
+    }
+
+    renderMask();
   }
 
   /* ---------- page transition curtain ---------- */

@@ -8,3 +8,7 @@ dist/
 CV_PROFILE.md
 *CV_PROFILE*
 *cv_profile*
+
+# Local agent skills and configurations
+.agents/
+
