@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="Andalasia Creative — Case study · Randevough"
+  description="How I developed a high-performance commercial portfolio website for Andalasia Creative production house in Jakarta."
+  isCaseStudy={true}
+>
+  <main id="top">
+    <section class="cs">
+      <a class="cs__back" href={`${base}#work`}><span><span class="arw arw--left">&#8592;</span></span> All work</a>
+      <h1 class="cs__title" data-split>Andalasia Creative</h1>
+      <p class="cs__lede" data-fade>Commercial website and production showcase for a Jakarta-based creative agency &mdash; built with React, Vite, and Tailwind CSS for mobile speed and conversion.</p>
+
+      <div class="cs__meta">
+        <div data-fade><span>Role</span>Frontend developer</div>
+        <div data-fade style="--d:70ms"><span>Year</span>2024</div>
+        <div data-fade style="--d:140ms"><span>Stack</span>React · Vite · Tailwind CSS · JavaScript</div>
+        <div data-fade style="--d:210ms"><span>Status</span><a href="https://andalasiagroup.com/" target="_blank" rel="noopener" style="color:var(--accent);">Live site &#8599;</a></div>
+      </div>
+
+      <div class="cs__hero" data-fade><img src={`${base}assets/work-andalasia.png`} alt="Andalasia Creative production website"></div>
+    </section>
+
+    <section class="cs__body">
+
+      <div class="cs__block">
+        <h2><small>01</small>Context</h2>
+        <div>
+          <p data-fade>Andalasia Creative (Andalasia Group) is an event management and creative production house in Jakarta. They handle multi-day corporate conferences, brand activations, professional live streaming broadcasts, and commercial video production.</p>
+          <p data-fade>To pitch for larger enterprise contracts, the agency needed a sharp digital portfolio that reflected their production standards and made event booking effortless for corporate clients.</p>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>02</small>The problem</h2>
+        <div>
+          <p data-fade>The agency's existing online presence suffered from slow load times caused by uncompressed video reels and heavy image assets. Corporate clients opening the site on mobile phones frequently experienced severe lag and difficult navigation.</p>
+          <p data-fade>The service offerings were scattered across unstructured paragraphs, obscuring their core capabilities and creating friction in the consultation booking funnel.</p>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>03</small>Approach</h2>
+        <div>
+          <ul class="cs__list">
+            <li data-fade><strong>Vite and React foundation.</strong> Rebuilt the frontend architecture using Vite for rapid builds and optimized bundle chunking, keeping the initial JavaScript payload under 75 KB gzipped.</li>
+            <li data-fade><strong>Aggressive asset optimization.</strong> Converted raw event photography and video reels into modern WebP formats with responsive source sets and low-quality image placeholders to eliminate layout shifts.</li>
+            <li data-fade><strong>Clear four-pillar architecture.</strong> Restructured agency services into four distinct, scannable divisions: Event Management, Digital Marketing, Live Streaming, and Film &amp; Photography, each paired with concrete client deliverables.</li>
+            <li data-fade><strong>Direct conversion funnels.</strong> Added persistent, context-aware contact actions that route potential clients directly to WhatsApp and email with pre-filled event inquiry templates.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>04</small>Interface</h2>
+        <div>
+          <p data-fade>Crafted a sleek, high-contrast dark theme reflecting premium entertainment and production standards. Smooth scroll interactions, clean service carousels, and client marquees guide visitors through past work without distracting visual clutter.</p>
+          <p data-fade>Touch targets and font sizes were calibrated specifically for mobile viewports, where more than 70% of potential event clients first discover the studio.</p>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>05</small>Outcome</h2>
+        <div>
+          <p data-fade>The website launched at <code>andalasiagroup.com</code> and immediately halved page load times across mobile and desktop connections.</p>
+          <p data-fade>The streamlined structure gave the agency an executive presentation tool for corporate pitches and simplified client inquiry intake for upcoming events and commercial shoots.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="cs__next">
+      <a href={`${base}work/codequest/`} data-pt data-magnetic>
+        <div><span class="mono">Next</span><br><strong>CodeQuest</strong></div>
+        <span><span class="arw arw--right">&#8594;</span></span>
+      </a>
+    </div>
+  </main>
+</BaseLayout>

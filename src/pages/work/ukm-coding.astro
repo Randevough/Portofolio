@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="UKM Coding — Case study · Randevough"
+  description="How I architected and built the official editorial platform and project showcase for Cyber University's student coding community."
+  isCaseStudy={true}
+>
+  <main id="top">
+    <section class="cs">
+      <a class="cs__back" href={`${base}#work`}><span><span class="arw arw--left">&#8592;</span></span> All work</a>
+      <h1 class="cs__title" data-split>UKM Coding</h1>
+      <p class="cs__lede" data-fade>The official editorial website and project archive for Cyber University's coding community &mdash; combining an Astro frontend with Sanity CMS for student writers.</p>
+
+      <div class="cs__meta">
+        <div data-fade><span>Role</span>Tech lead &amp; developer</div>
+        <div data-fade style="--d:70ms"><span>Year</span>2025</div>
+        <div data-fade style="--d:140ms"><span>Stack</span>Astro · React · TypeScript · Sanity CMS</div>
+        <div data-fade style="--d:210ms"><span>Status</span><a href="https://ukmcoding.site/" target="_blank" rel="noopener" style="color:var(--accent);">Live demo &#8599;</a></div>
+      </div>
+
+      <div class="cs__hero" data-fade><img src={`${base}assets/work-ukmcoding.png`} alt="UKM Coding community platform"></div>
+    </section>
+
+    <section class="cs__body">
+
+      <div class="cs__block">
+        <h2><small>01</small>Context</h2>
+        <div>
+          <p data-fade>UKM Coding is the student technology collective at Cyber University in Jakarta. Members run hands-on workshops, organise competitions like DECOMPE, and build software projects across various tech stacks.</p>
+          <p data-fade>The community needed a central hub to document software projects, publish organizational updates and tutorials, and handle partnership requests from tech companies and campus media partners.</p>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>02</small>The problem</h2>
+        <div>
+          <p data-fade>Student work was scattered across Discord messages, GitHub repos, and Instagram stories. When members applied for jobs or internships, there was no single canonical portfolio to verify what the club had built.</p>
+          <p data-fade>At the same time, community coordinators needed to draft announcements and event recaps without touching source code or asking engineers to merge pull requests for simple typo fixes.</p>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>03</small>Approach</h2>
+        <div>
+          <ul class="cs__list">
+            <li data-fade><strong>Astro for zero-JS baseline performance.</strong> Selected Astro to compile content-heavy pages into clean static HTML. Interactive components &mdash; like the quick-view project modal, mobile navigation drawer, and filter bars &mdash; are hydrated as lightweight client islands.</li>
+            <li data-fade><strong>Headless Sanity Studio integration.</strong> Structured content schemas for projects, updates, and community partners. Non-technical writers manage draft statuses, upload responsive cover images, and publish posts through an intuitive cloud studio.</li>
+            <li data-fade><strong>Custom GROQ data queries.</strong> Tailored data fetching retrieves only required fields at build time, eliminating payload bloat and keeping build times under 45 seconds.</li>
+            <li data-fade><strong>Accessible interactions by default.</strong> Implemented accessible keyboard focus traps for modal dialogs, semantic landmark regions, and smooth scroll animations tuned for reduced-motion preferences.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>04</small>Interface</h2>
+        <div>
+          <p data-fade>The platform is designed with an editorial aesthetic featuring Plus Jakarta Sans and Instrument Serif typography. Projects feature interactive preview dialogs that display tech stack tags and direct repo links without triggering full page reloads.</p>
+          <p data-fade>A dedicated collaboration portal provides structured inquiry templates for workshops, media partnerships, and sponsored projects, routing proposals directly to the team.</p>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>05</small>Outcome</h2>
+        <div>
+          <p data-fade>The site is live in production at <code>ukmcoding.site</code> and serves as the primary external face for the organization. Over 10 student software initiatives and multiple university event recaps are catalogued in the permanent archive.</p>
+          <p data-fade>Content updates now happen directly through Sanity Studio without developer intervention, while the Astro architecture delivers sub-second page loads even on spotty campus cellular networks.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="cs__next">
+      <a href={`${base}work/andalasia/`} data-pt data-magnetic>
+        <div><span class="mono">Next</span><br><strong>Andalasia Creative</strong></div>
+        <span><span class="arw arw--right">&#8594;</span></span>
+      </a>
+    </div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="AksaraNetra — Case study · Randevough"
+  description="How I engineered AksaraNetra, an automated accessibility audit engine and reader for Indonesian public websites."
+  isCaseStudy={true}
+>
+  <main id="top">
+    <section class="cs">
+      <a class="cs__back" href={`${base}#work`}><span><span class="arw arw--left">&#8592;</span></span> All work</a>
+      <h1 class="cs__title" data-split>AksaraNetra</h1>
+      <p class="cs__lede" data-fade>An automated web accessibility audit engine and real-time reader mode for Indonesian public websites &mdash; built with Next.js, Node.js, and headless Playwright.</p>
+
+      <div class="cs__meta">
+        <div data-fade><span>Role</span>Full-stack engineer</div>
+        <div data-fade style="--d:70ms"><span>Year</span>2025</div>
+        <div data-fade style="--d:140ms"><span>Stack</span>Next.js · Node.js · TypeScript · Playwright</div>
+        <div data-fade style="--d:210ms"><span>Status</span><a href="https://aksaranetra.vercel.app/" target="_blank" rel="noopener" style="color:var(--accent);">Live demo &#8599;</a></div>
+      </div>
+
+      <div class="cs__hero" data-fade><img src={`${base}assets/work-aksaranetra.png`} alt="AksaraNetra accessibility audit dashboard"></div>
+    </section>
+
+    <section class="cs__body">
+
+      <div class="cs__block">
+        <h2><small>01</small>Context</h2>
+        <div>
+          <p data-fade>Digital public services in Indonesia frequently fail basic accessibility benchmarks. Government portals, university sites, and public news outlets often contain unlabelled icon buttons, low-contrast text, missing image descriptions, and broken keyboard focus rings. For visually impaired citizens relying on screen readers like NVDA or TalkBack, critical information becomes unreadable.</p>
+          <p data-fade>Existing enterprise audit tools produce dense PDF reports with hundreds of compliance codes, but offer no immediate relief to users trying to read the page today.</p>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>02</small>The problem</h2>
+        <div>
+          <p data-fade>Evaluating modern websites accurately cannot be done with static HTML parsers alone. Modern portals load heavy client-side JavaScript, render dynamic widgets, and hydrate asynchronously.</p>
+          <p data-fade>The platform needed to solve two challenges simultaneously: evaluate live rendered DOM nodes against WCAG 2.1 Level A &amp; AA standards without false positives, and safely reconstruct the content into an accessible reader view without altering the original website or introducing inaccurate AI guesses.</p>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>03</small>Approach</h2>
+        <div>
+          <ul class="cs__list">
+            <li data-fade><strong>Headless Chromium pipeline with Playwright.</strong> Rather than scraping raw HTML strings, AksaraNetra launches a headless browser instance to execute scripts, resolve web fonts, and measure exact computed color contrast ratios against background elements.</li>
+            <li data-fade><strong>Non-destructive remediation engine.</strong> Applies targeted, verified fixes only: injecting descriptive aria-labels where surrounding context is clear, adding <code>tabIndex="0"</code> to interactive scroll containers, and restructuring messy nested tags into clean semantic headings.</li>
+            <li data-fade><strong>Strict validation before output.</strong> Every automated fix is re-scored. If an attempted adjustment reduces readability or fails contrast verification, the change is reverted immediately and flagged for human review.</li>
+            <li data-fade><strong>Zero hallucination policy.</strong> Missing image alt text is deliberately left blank rather than filled with AI-generated guesses that could mislead blind users about official notices or data charts.</li>
+            <li data-fade><strong>Privacy and public-only scope.</strong> Authentication barriers, payment gateways, and personal data forms are explicitly excluded from automated crawling to protect user privacy.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>04</small>Interface</h2>
+        <div>
+          <p data-fade>The diagnostic interface breaks down complex accessibility data into five transparent stages: address validation, DOM inspection, rule execution, re-assessment, and reader rendering. Users can see every automated decision and inspect before-and-after issue reduction metrics side by side.</p>
+          <p data-fade>The resulting reader mode formats articles into a single-column layout with high-contrast typography, predictable heading hierarchies, and full keyboard-only navigation.</p>
+        </div>
+      </div>
+
+      <div class="cs__block">
+        <h2><small>05</small>Outcome</h2>
+        <div>
+          <p data-fade>AksaraNetra is deployed to production on Vercel and available open-source. On audited regional government pages, the engine demonstrated average accessibility barrier reductions of over 80% while restoring screen reader navigability.</p>
+          <p data-fade>The project was tested against real screen reader environments including NVDA and desktop keyboard navigation, proving that automated accessibility tooling can bridge the gap between compliance auditing and everyday reading.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="cs__next">
+      <a href={`${base}work/ukm-coding/`} data-pt data-magnetic>
+        <div><span class="mono">Next</span><br><strong>UKM Coding</strong></div>
+        <span><span class="arw arw--right">&#8594;</span></span>
+      </a>
+    </div>
+  </main>
+</BaseLayout>
