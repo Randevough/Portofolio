@@ -2,6 +2,5 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "strictNullChecks": true
-  },
-  "exclude": ["legacy", "scripts", "styles", "work"]
+  }
 }

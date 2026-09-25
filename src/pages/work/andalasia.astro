@@ -5,7 +5,7 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout
-  title="Andalasia Creative — Case study · Randevough"
+  title="Andalasia Creative · Case study · Rafi Fernanda"
   description="How I developed a high-performance commercial portfolio website for Andalasia Creative production house in Jakarta."
   isCaseStudy={true}
 >
@@ -13,7 +13,7 @@ const base = import.meta.env.BASE_URL;
     <section class="cs">
       <a class="cs__back" href={`${base}#work`}><span><span class="arw arw--left">&#8592;</span></span> All work</a>
       <h1 class="cs__title" data-split>Andalasia Creative</h1>
-      <p class="cs__lede" data-fade>Commercial website and production showcase for a Jakarta-based creative agency &mdash; built with React, Vite, and Tailwind CSS for mobile speed and conversion.</p>
+      <p class="cs__lede" data-fade>Commercial website and production showcase for a Jakarta-based creative agency, built with React, Vite, and Tailwind CSS for mobile speed and conversion.</p>
 
       <div class="cs__meta">
         <div data-fade><span>Role</span>Frontend developer</div>
@@ -59,7 +59,12 @@ const base = import.meta.env.BASE_URL;
         <h2><small>04</small>Interface</h2>
         <div>
           <p data-fade>Crafted a sleek, high-contrast dark theme reflecting premium entertainment and production standards. Smooth scroll interactions, clean service carousels, and client marquees guide visitors through past work without distracting visual clutter.</p>
-          <p data-fade>Touch targets and font sizes were calibrated specifically for mobile viewports, where more than 70% of potential event clients first discover the studio.</p>
+          <div class="cs__shots" style="margin-top:24px;">
+            <figure data-fade><img src={`${base}assets/andalasia-shot-1.png`} alt="Cinematic hero"><figcaption>Landing hero: dark cinematic creative showcase</figcaption></figure>
+            <figure data-fade style="--d:80ms"><img src={`${base}assets/andalasia-shot-2.png`} alt="Four service divisions"><figcaption>Service matrix: event management, streaming &amp; media</figcaption></figure>
+            <figure data-fade style="--d:160ms"><img src={`${base}assets/andalasia-shot-3.png`} alt="Work portfolio"><figcaption>Work archive: commercial projects &amp; brand activations</figcaption></figure>
+            <figure data-fade style="--d:240ms"><img src={`${base}assets/andalasia-shot-4.png`} alt="Agency studio identity"><figcaption>Agency identity: track record &amp; client inquiry funnel</figcaption></figure>
+          </div>
         </div>
       </div>
 

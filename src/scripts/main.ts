@@ -1,3 +1,5 @@
+import { sound } from './audio';
+
 /* =================================================================
    RANDEVOUGH — STUDIO GROTESK
 
@@ -10,6 +12,7 @@
    ================================================================= */
 (function () {
   'use strict';
+  sound.bindAutoListeners();
 
   interface ProofItem {
     id: string;
@@ -145,6 +148,7 @@
     };
 
     var litStack = function (i: number) {
+      sound.playStackHover(i);
       var t = STACK[i];
       techItems.forEach(function (el, k) { el.classList.toggle('is-active', k === i); });
       proofItems.forEach(function (el) {
@@ -627,6 +631,7 @@
       var href = a.getAttribute('href');
       if (!href || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
       e.preventDefault();
+      sound.playTransition();
       try {
         sessionStorage.setItem('rv-skip-loader', '1');
       } catch (err) {}

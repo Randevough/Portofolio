@@ -5,7 +5,7 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout
-  title="AksaraNetra — Case study · Randevough"
+  title="AksaraNetra · Case study · Rafi Fernanda"
   description="How I engineered AksaraNetra, an automated accessibility audit engine and reader for Indonesian public websites."
   isCaseStudy={true}
 >
@@ -13,7 +13,7 @@ const base = import.meta.env.BASE_URL;
     <section class="cs">
       <a class="cs__back" href={`${base}#work`}><span><span class="arw arw--left">&#8592;</span></span> All work</a>
       <h1 class="cs__title" data-split>AksaraNetra</h1>
-      <p class="cs__lede" data-fade>An automated web accessibility audit engine and real-time reader mode for Indonesian public websites &mdash; built with Next.js, Node.js, and headless Playwright.</p>
+      <p class="cs__lede" data-fade>An automated web accessibility audit engine and real-time reader mode for Indonesian public websites, built with Next.js, Node.js, and headless Playwright.</p>
 
       <div class="cs__meta">
         <div data-fade><span>Role</span>Full-stack engineer</div>
@@ -60,7 +60,12 @@ const base = import.meta.env.BASE_URL;
         <h2><small>04</small>Interface</h2>
         <div>
           <p data-fade>The diagnostic interface breaks down complex accessibility data into five transparent stages: address validation, DOM inspection, rule execution, re-assessment, and reader rendering. Users can see every automated decision and inspect before-and-after issue reduction metrics side by side.</p>
-          <p data-fade>The resulting reader mode formats articles into a single-column layout with high-contrast typography, predictable heading hierarchies, and full keyboard-only navigation.</p>
+          <div class="cs__shots" style="margin-top:24px;">
+            <figure data-fade><img src={`${base}assets/aksaranetra-shot-1.png`} alt="Auditor landing"><figcaption>Auditor landing: public URL input and quick launch</figcaption></figure>
+            <figure data-fade style="--d:80ms"><img src={`${base}assets/aksaranetra-shot-2.png`} alt="Diagnostic input"><figcaption>Diagnostic setup: target URL submission with government presets</figcaption></figure>
+            <figure data-fade style="--d:160ms"><img src={`${base}assets/aksaranetra-shot-3.png`} alt="Audit session state"><figcaption>Audit session: assessment retrieval and re-evaluation trigger</figcaption></figure>
+            <figure data-fade style="--d:240ms"><img src={`${base}assets/aksaranetra-shot-4.png`} alt="Pipeline specification"><figcaption>Pipeline overview: transparent 5-stage automated DOM remediation</figcaption></figure>
+          </div>
         </div>
       </div>
 

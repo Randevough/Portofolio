@@ -5,7 +5,7 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout
-  title="UKM Coding — Case study · Randevough"
+  title="UKM Coding · Case study · Rafi Fernanda"
   description="How I architected and built the official editorial platform and project showcase for Cyber University's student coding community."
   isCaseStudy={true}
 >
@@ -13,7 +13,7 @@ const base = import.meta.env.BASE_URL;
     <section class="cs">
       <a class="cs__back" href={`${base}#work`}><span><span class="arw arw--left">&#8592;</span></span> All work</a>
       <h1 class="cs__title" data-split>UKM Coding</h1>
-      <p class="cs__lede" data-fade>The official editorial website and project archive for Cyber University's coding community &mdash; combining an Astro frontend with Sanity CMS for student writers.</p>
+      <p class="cs__lede" data-fade>The official editorial website and project archive for Cyber University's coding community, combining an Astro frontend with Sanity CMS for student writers.</p>
 
       <div class="cs__meta">
         <div data-fade><span>Role</span>Tech lead &amp; developer</div>
@@ -47,7 +47,7 @@ const base = import.meta.env.BASE_URL;
         <h2><small>03</small>Approach</h2>
         <div>
           <ul class="cs__list">
-            <li data-fade><strong>Astro for zero-JS baseline performance.</strong> Selected Astro to compile content-heavy pages into clean static HTML. Interactive components &mdash; like the quick-view project modal, mobile navigation drawer, and filter bars &mdash; are hydrated as lightweight client islands.</li>
+            <li data-fade><strong>Astro for zero-JS baseline performance.</strong> Selected Astro to compile content-heavy pages into clean static HTML. Interactive components (including the quick-view project modal, mobile navigation drawer, and filter bars) are hydrated as lightweight client islands.</li>
             <li data-fade><strong>Headless Sanity Studio integration.</strong> Structured content schemas for projects, updates, and community partners. Non-technical writers manage draft statuses, upload responsive cover images, and publish posts through an intuitive cloud studio.</li>
             <li data-fade><strong>Custom GROQ data queries.</strong> Tailored data fetching retrieves only required fields at build time, eliminating payload bloat and keeping build times under 45 seconds.</li>
             <li data-fade><strong>Accessible interactions by default.</strong> Implemented accessible keyboard focus traps for modal dialogs, semantic landmark regions, and smooth scroll animations tuned for reduced-motion preferences.</li>
@@ -59,7 +59,12 @@ const base = import.meta.env.BASE_URL;
         <h2><small>04</small>Interface</h2>
         <div>
           <p data-fade>The platform is designed with an editorial aesthetic featuring Plus Jakarta Sans and Instrument Serif typography. Projects feature interactive preview dialogs that display tech stack tags and direct repo links without triggering full page reloads.</p>
-          <p data-fade>A dedicated collaboration portal provides structured inquiry templates for workshops, media partnerships, and sponsored projects, routing proposals directly to the team.</p>
+          <div class="cs__shots" style="margin-top:24px;">
+            <figure data-fade><img src={`${base}assets/ukmcoding-shot-1.png`} alt="Community portal"><figcaption>Community portal: student club mission and active tracks</figcaption></figure>
+            <figure data-fade style="--d:80ms"><img src={`${base}assets/ukmcoding-shot-2.png`} alt="Project showcase"><figcaption>Project archive: curated software initiatives and domain filters</figcaption></figure>
+            <figure data-fade style="--d:160ms"><img src={`${base}assets/ukmcoding-shot-3.png`} alt="Editorial CMS"><figcaption>Editorial CMS: headless Sanity-backed updates and media</figcaption></figure>
+            <figure data-fade style="--d:240ms"><img src={`${base}assets/ukmcoding-shot-4.png`} alt="Partnership portal"><figcaption>Collaboration intake: structured partner and sponsor outreach</figcaption></figure>
+          </div>
         </div>
       </div>
 
