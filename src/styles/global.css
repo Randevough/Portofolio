@@ -75,7 +75,7 @@ html.fine .spot{display:block;}
   box-shadow:inset 0 0 clamp(120px,16vw,260px) clamp(30px,5vw,90px) rgba(0,0,0,.62);}
 
 .rules{inset:0;z-index:4;max-width:var(--max);margin:0 auto;padding:0 var(--pad);
-  display:grid;grid-template-columns:repeat(6,1fr);}
+  display:grid;grid-template-columns:repeat(4,1fr);}
 .rules span{border-left:1px solid rgba(255,255,255,.026);}
 .rules span:last-child{border-right:1px solid rgba(255,255,255,.026);}
 
@@ -310,7 +310,7 @@ html.motion .hero.is-pushed .hero__inner{transform:none;}
 .hero__line{display:block;overflow:hidden;padding-bottom:.02em;}
 .hero__line > span{display:block;}
 .hero__foot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:36px;align-items:end;
-  margin-top:clamp(26px,4.5vh,54px);padding-top:26px;border-top:1px solid var(--line);}
+  margin-top:clamp(26px,4.5vh,54px);padding-top:0;}
 .hero__lede{max-width:46ch;color:var(--muted);font-size:.97rem;}
 .hero__actions{display:flex;gap:12px;flex-wrap:wrap;}
 .hero__meta{display:flex;justify-content:space-between;align-items:center;color:var(--dim);
