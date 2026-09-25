@@ -51,16 +51,10 @@ html{scrollbar-width:thin;scrollbar-color:var(--line-2) #0A0A0A;}
 /* ---------- 03 TEXTURE ---------- */
 .grain,.grain2,.glow,.spot,.rules,.vignette{position:fixed;pointer-events:none;}
 
-.grain{inset:-150%;z-index:90;opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grainShift 700ms steps(1) infinite;will-change:transform;}
-@keyframes grainShift{
-  0%{transform:translate(0,0);}   20%{transform:translate(-3%,2%);}
-  40%{transform:translate(2%,-3%);} 60%{transform:translate(-2%,-2%);}
-  80%{transform:translate(3%,1%);} 100%{transform:translate(0,0);}}
+.grain{inset:0;z-index:90;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 
-/* second, finer, perfectly static grain — stops the moving layer
-   from reading as "noise" and gives the black an actual surface */
+/* second, finer, perfectly static grain — gives the dark surface analog depth */
 .grain2{inset:0;z-index:89;opacity:.035;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.4' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");}
 
