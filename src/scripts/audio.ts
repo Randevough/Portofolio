@@ -24,6 +24,25 @@ class DarkAudioEngine {
   private lastStackTime: number = 0;
   private lastMagneticTime: number = 0;
   private lastTransitionTime: number = 0;
+  private paperNoiseBuffer: AudioBuffer | null = null;
+
+  private getPaperNoiseBuffer(): AudioBuffer | null {
+    if (!this.ctx) return null;
+    if (this.paperNoiseBuffer) return this.paperNoiseBuffer;
+    const bufferSize = Math.floor(this.ctx.sampleRate * 0.055);
+    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    let b0 = 0, b1 = 0, b2 = 0;
+    for (let i = 0; i < bufferSize; i++) {
+      const white = Math.random() * 2 - 1;
+      b0 = 0.99765 * b0 + white * 0.0990460;
+      b1 = 0.96300 * b1 + white * 0.2965164;
+      b2 = 0.57000 * b2 + white * 1.0526913;
+      data[i] = (b0 + b1 + b2 + white * 0.1848) * 0.14;
+    }
+    this.paperNoiseBuffer = buffer;
+    return buffer;
+  }
 
   private initContext() {
     if (!this.ctx) {
@@ -187,7 +206,7 @@ class DarkAudioEngine {
   }
 
   /**
-   * Crisp felt/paper switch click when hovering/expanding Experience timeline rows
+   * Velvet paper / folio brush whisper when hovering How I Work items and timeline rows
    */
   public playRow() {
     this.initContext();
@@ -195,21 +214,31 @@ class DarkAudioEngine {
 
     try {
       const now = this.ctx.currentTime;
-      const osc = this.ctx.createOscillator();
+      const buffer = this.getPaperNoiseBuffer();
+      if (!buffer) return;
+
+      const noiseSource = this.ctx.createBufferSource();
+      noiseSource.buffer = buffer;
+
+      // Bandpass filter shaping to mimic fibrous matte card paper sliding across surface
+      const filter = this.ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(820, now);
+      filter.frequency.exponentialRampToValueAtTime(540, now + 0.05);
+      filter.Q.setValueAtTime(1.1, now);
+
       const gain = this.ctx.createGain();
+      // Whisper-level envelope: soft attack (6ms) + smooth decay (45ms)
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.linearRampToValueAtTime(0.036, now + 0.008);
+      gain.gain.exponentialRampToValueAtTime(0.0005, now + 0.052);
 
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(220, now);
-      osc.frequency.exponentialRampToValueAtTime(60, now + 0.022);
-
-      gain.gain.setValueAtTime(0.07, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.022);
-
-      osc.connect(gain);
+      noiseSource.connect(filter);
+      filter.connect(gain);
       gain.connect(this.ctx.destination);
 
-      osc.start(now);
-      osc.stop(now + 0.025);
+      noiseSource.start(now);
+      noiseSource.stop(now + 0.055);
     } catch {}
   }
 
@@ -326,21 +355,33 @@ class DarkAudioEngine {
       }
     });
 
-    // Next Project card in case studies
-    document.addEventListener('mouseenter', (e) => {
+    // Next Project card in case studies (single trigger per card)
+    let lastNextCard: Element | null = null;
+    document.addEventListener('mouseover', (e) => {
       const nextCard = (e.target as Element)?.closest('.cs__next a');
       if (nextCard) {
-        this.playNextProject();
+        if (nextCard !== lastNextCard) {
+          lastNextCard = nextCard;
+          this.playNextProject();
+        }
+      } else {
+        lastNextCard = null;
       }
-    }, { capture: true, passive: true });
+    }, { passive: true });
 
-    // Experience timeline row hovers
-    document.addEventListener('mouseenter', (e) => {
-      const row = (e.target as Element)?.closest('.row');
+    // Experience timeline row hovers and How I Work items (single trigger per card)
+    let lastRowCard: Element | null = null;
+    document.addEventListener('mouseover', (e) => {
+      const row = (e.target as Element)?.closest('.row, .how__item');
       if (row) {
-        this.playRow();
+        if (row !== lastRowCard) {
+          lastRowCard = row;
+          this.playRow();
+        }
+      } else {
+        lastRowCard = null;
       }
-    }, { capture: true, passive: true });
+    }, { passive: true });
 
     // Magnetic button snap
     if (document.documentElement.classList.contains('fine')) {

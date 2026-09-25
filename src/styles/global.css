@@ -335,7 +335,7 @@ html.motion .hero.is-pushed .hero__inner{transform:none;}
 .statement{position:relative;z-index:1;max-width:var(--max);margin:0 auto;
   padding:clamp(48px,7vh,76px) var(--pad) clamp(70px,11vh,120px);}
 .statement__text{font-size:clamp(1.7rem,4.6vw,3.9rem);font-weight:500;letter-spacing:-.045em;
-  line-height:1.1;max-width:22ch;}
+  line-height:1.1;max-width:36ch;text-wrap:balance;}
 .statement__text em{font-style:normal;color:var(--accent);}
 .statement__mark{color:var(--dim);display:block;margin-bottom:clamp(18px,2.8vh,30px);}
 
