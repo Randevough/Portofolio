@@ -69,10 +69,8 @@ Before launching this portfolio to production, complete the following items by r
 
 - [ ] **Web3Forms Access Key**: Replace `YOUR_WEB3FORMS_ACCESS_KEY` in `src/pages/index.astro` (in the `<form data-cform>` element) with a valid key from [Web3Forms](https://web3forms.com/).
 - [ ] **WhatsApp Contact Link**: Replace `https://wa.me/62XXXXXXXXXX` in `src/pages/index.astro` with your real phone number.
-- [ ] **Curriculum Vitae (PDF)**: Replace the placeholder file at `public/assets/randevough-cv.pdf` with your actual resume PDF.
-- [ ] **Project Screenshots & Mockups**:
-  - Replace SVG wireframes (`public/assets/work-codequest.svg`, `work-parking.svg`, `work-artakarsa.svg`, `work-songunlocked.svg`) with real project screenshots or renders.
-  - Replace case study detail shots (`public/assets/shot-1.svg`, `shot-2.svg`, `shot-3.svg`, `shot-4.svg`) with real interface screenshots.
+- [x] **Curriculum Vitae (PDF)**: Configured at `public/assets/CV_Muhamad Rafi Fernanda.pdf` and linked in navigation.
+- [x] **Project Screenshots & Mockups**: Real WebP renders implemented for all portfolio panels and case study heroes.
 - [ ] **CodeQuest Case Study Outcome Metrics**: Update the placeholder paragraph in `src/pages/work/codequest.astro` under Section 05 Outcome (`<em style="color:var(--muted)">Placeholder — replace with real numbers...</em>`) with real metrics (active users, submissions processed, completion rate).
 - [ ] **Live Project Links**: Update gallery items for *Smart Parking*, *School Connect*, and *SongUnlocked* in `src/pages/index.astro` when case studies or live links are available (currently pointing at `#` with `data-hover="Soon"`).
 - [ ] **Experience Years & Timeline Estimates**: Verify and update estimated timeline indicators (e.g. `Est. 2021` in hero, `Four projects — 2023 to 2026` in work header, and `ROLES` array in `src/scripts/main.ts`).
