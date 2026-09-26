@@ -18,7 +18,7 @@ const andalasiaRoute = `${base}work/andalasia/`;
 <BaseLayout
   title="Rafi Fernanda · Full-stack Developer"
   description="Full-stack developer building reliable web applications, APIs, and real-time dashboards with TypeScript, Next.js, and PostgreSQL. Open for freelance projects and internships."
-  showLoader={true}
+  showLoader={false} /* Set to true to re-enable 0-100 intro loader */
   showRail={true}
 >
   <main id="top">
@@ -45,7 +45,7 @@ const andalasiaRoute = `${base}work/andalasia/`;
         <p class="hero__lede" data-fade>I build full-stack web applications, dashboards, and backend APIs from scratch to production. Available for freelance contracts and engineering roles.</p>
         <div class="hero__actions" data-fade>
           <a class="btn btn--solid" href="#work" data-magnetic><span>Selected work</span></a>
-          <a class="btn" href="#contact" data-magnetic><span>Discuss a project</span><span><span class="arw">&#8599;</span></span></a>
+          <a class="btn" href="#contact" data-magnetic><span>Discuss a project</span><span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
         </div>
       </div>
     </div>
@@ -103,7 +103,7 @@ const andalasiaRoute = `${base}work/andalasia/`;
       <div class="section__head">
         <h2 class="section__title" data-split>Selected work</h2>
         <a class="section__note mono work__github" href="https://github.com/randevough" target="_blank" rel="noopener" data-fade data-magnetic>
-          <span>Explore all on GitHub</span> <span><span class="arw">&#8599;</span></span>
+          <span>Explore all on GitHub</span> <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span>
         </a>
       </div>
     </div>
@@ -126,8 +126,8 @@ const andalasiaRoute = `${base}work/andalasia/`;
               <li><span class="mono">Stack</span>Next.js / TypeScript / Prisma / NextAuth / Tailwind</li>
             </ul>
             <div class="panel__links">
-              <a class="btn btn--solid btn--sm" href={codequestRoute} data-pt data-magnetic><span>Read case study</span> <span><span class="arw">&#8599;</span></span></a>
-              <a class="link link--dim" href="https://github.com/Randevough/CodeQuest" target="_blank" rel="noopener" data-magnetic>Source code <span><span class="arw">&#8599;</span></span></a>
+              <a class="btn btn--solid btn--sm" href={codequestRoute} data-pt data-magnetic><span>Read case study</span> <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+              <a class="link link--dim" href="https://github.com/Randevough/CodeQuest" target="_blank" rel="noopener" data-magnetic>Source code <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
             </div>
           </div>
         </article>
@@ -147,8 +147,8 @@ const andalasiaRoute = `${base}work/andalasia/`;
               <li><span class="mono">Stack</span>Next.js / Node.js / TypeScript / Playwright / Chromium</li>
             </ul>
             <div class="panel__links">
-              <a class="btn btn--solid btn--sm" href={aksaranetraRoute} data-pt data-magnetic><span>Read case study</span> <span><span class="arw">&#8599;</span></span></a>
-              <a class="link link--dim" href="https://aksaranetra.vercel.app/" target="_blank" rel="noopener" data-magnetic>Live demo <span><span class="arw">&#8599;</span></span></a>
+              <a class="btn btn--solid btn--sm" href={aksaranetraRoute} data-pt data-magnetic><span>Read case study</span> <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+              <a class="link link--dim" href="https://aksaranetra.vercel.app/" target="_blank" rel="noopener" data-magnetic>Live demo <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
             </div>
           </div>
         </article>
@@ -168,8 +168,8 @@ const andalasiaRoute = `${base}work/andalasia/`;
               <li><span class="mono">Stack</span>Astro / React / TypeScript / Sanity CMS / Tailwind</li>
             </ul>
             <div class="panel__links">
-              <a class="btn btn--solid btn--sm" href={ukmcodingRoute} data-pt data-magnetic><span>Read case study</span> <span><span class="arw">&#8599;</span></span></a>
-              <a class="link link--dim" href="https://ukmcoding.site/" target="_blank" rel="noopener" data-magnetic>Live demo <span><span class="arw">&#8599;</span></span></a>
+              <a class="btn btn--solid btn--sm" href={ukmcodingRoute} data-pt data-magnetic><span>Read case study</span> <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+              <a class="link link--dim" href="https://ukmcoding.site/" target="_blank" rel="noopener" data-magnetic>Live demo <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
             </div>
           </div>
         </article>
@@ -189,8 +189,8 @@ const andalasiaRoute = `${base}work/andalasia/`;
               <li><span class="mono">Stack</span>React / Vite / Tailwind CSS / JavaScript</li>
             </ul>
             <div class="panel__links">
-              <a class="btn btn--solid btn--sm" href={andalasiaRoute} data-pt data-magnetic><span>Read case study</span> <span><span class="arw">&#8599;</span></span></a>
-              <a class="link link--dim" href="https://andalasiagroup.com/" target="_blank" rel="noopener" data-magnetic>Live demo <span><span class="arw">&#8599;</span></span></a>
+              <a class="btn btn--solid btn--sm" href={andalasiaRoute} data-pt data-magnetic><span>Read case study</span> <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+              <a class="link link--dim" href="https://andalasiagroup.com/" target="_blank" rel="noopener" data-magnetic>Live demo <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
             </div>
           </div>
         </article>
@@ -208,70 +208,173 @@ const andalasiaRoute = `${base}work/andalasia/`;
   <!-- ============ 06 SERVICES ============ -->
   <section class="section services" id="services" data-skew>
     <div class="section__head">
-      <span class="section__num mono">02</span>
       <h2 class="section__title" data-split>What I can build for you</h2>
-      <p class="section__note mono" data-fade>Clear scope, weekly milestones, and documented deliverables.</p>
+      <p class="section__note mono" data-fade>Weekly staging demos, direct communication, 100% code ownership</p>
     </div>
 
     <div class="svc">
+      <!-- Card 01: Web Applications & Digital Products -->
       <div class="svc__card" data-fade>
-        <span class="svc__num mono">S01</span>
-        <h3>Web application</h3>
-        <p>End-to-end web application development from database architecture to production deployment, built with type safety, authentication, and an operational admin dashboard.</p>
+        <div class="svc__top">
+          <span class="svc__badge mono">FOR STARTUPS &amp; PRODUCTS</span>
+        </div>
+
+        <h3>Web Applications &amp; Digital Products</h3>
+        <p>Custom web applications built from scratch, engineered for fast page loads, secure payments, and reliable user authentication.</p>
+        
         <ul>
-          <li>Full-stack Next.js or React application</li>
-          <li>PostgreSQL schema design and authentication</li>
-          <li>Admin management dashboard</li>
-          <li>CI/CD deployment pipeline and handover documentation</li>
+          <li>
+            <svg class="svc__check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Custom user accounts, login systems, and permission levels</span>
+          </li>
+          <li>
+            <svg class="svc__check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Database setup, secure payments, and third-party API connections</span>
+          </li>
+          <li>
+            <svg class="svc__check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Responsive web interface designed for mobile and desktop screens</span>
+          </li>
+          <li>
+            <svg class="svc__check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Complete source code ownership with live production launch</span>
+          </li>
         </ul>
-        <span class="svc__meta mono">3&ndash;6 weeks</span>
+
+        <a href="#contact" class="svc__cta" data-svc-inquire data-svc-msg="Hi Rafi, I would like to discuss building a custom web application or software product. Here is an overview of what we need: ">
+          <span>Start this project</span>
+          <img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" />
+        </a>
       </div>
+
+      <!-- Card 02: Business Websites & Content Management -->
       <div class="svc__card" data-fade>
-        <span class="svc__num mono">S02</span>
-        <h3>Marketing site</h3>
-        <p>High-performance marketing websites optimized for search engines and conversion, connected to an intuitive CMS so your team can publish updates independently.</p>
+        <div class="svc__top">
+          <span class="svc__badge mono">FOR COMPANIES &amp; BRANDS</span>
+        </div>
+
+        <h3>Business Websites &amp; CMS</h3>
+        <p>High-performance business websites with an intuitive admin dashboard so your marketing team can publish updates independently.</p>
+        
         <ul>
-          <li>Responsive UI design and frontend build</li>
-          <li>Headless CMS integration for easy content edits</li>
-          <li>Technical SEO, OpenGraph cards, and analytics setup</li>
-          <li>Sub-second load times with 90+ Lighthouse performance scores</li>
+          <li>
+            <svg class="svc__check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Built with WordPress or modern Headless CMS (Sanity / Markdown)</span>
+          </li>
+          <li>
+            <svg class="svc__check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Visual editing dashboard customized for your content workflow</span>
+          </li>
+          <li>
+            <svg class="svc__check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Technical SEO setup, fast loading speeds, and social media cards</span>
+          </li>
+          <li>
+            <svg class="svc__check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Analytics integration and guided walkthrough for your team</span>
+          </li>
         </ul>
-        <span class="svc__meta mono">1&ndash;2 weeks</span>
+
+        <a href="#contact" class="svc__cta" data-svc-inquire data-svc-msg="Hi Rafi, I need a website with CMS / WordPress for my business. Here are our requirements: ">
+          <span>Start this project</span>
+          <img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" />
+        </a>
       </div>
+
+      <!-- Card 03: Internal Tools & Custom Dashboards -->
       <div class="svc__card" data-fade>
-        <span class="svc__num mono">S03</span>
-        <h3>IoT &amp; dashboards</h3>
-        <p>Connected IoT devices paired with secure data pipelines and responsive web dashboards for real-time sensor monitoring and device control.</p>
+        <div class="svc__top">
+          <span class="svc__badge mono">FOR OPERATIONS &amp; TEAMS</span>
+        </div>
+
+        <h3>Internal Tools &amp; Custom Dashboards</h3>
+        <p>Web-based operations portals and reporting dashboards that automate routine tasks, organize data, and replace messy spreadsheets.</p>
+        
         <ul>
-          <li>ESP32 or Arduino C++ firmware development</li>
-          <li>MQTT or HTTP telemetry ingestion and storage</li>
-          <li>Real-time browser monitoring dashboard</li>
-          <li>Hardware wiring schematics and operational documentation</li>
+          <li>
+            <svg class="svc__check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Interactive data tables with instant search, sorting, and CSV export</span>
+          </li>
+          <li>
+            <svg class="svc__check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Role-based admin panels (Staff, Manager, and Admin permissions)</span>
+          </li>
+          <li>
+            <svg class="svc__check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Workflow automations (automated email alerts and status tracking)</span>
+          </li>
+          <li>
+            <svg class="svc__check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Private, secure hosting with step-by-step user documentation</span>
+          </li>
         </ul>
-        <span class="svc__meta mono">2&ndash;4 weeks</span>
+
+        <a href="#contact" class="svc__cta" data-svc-inquire data-svc-msg="Hi Rafi, I am looking for a custom dashboard or internal tool to manage our operations. Here is what we need: ">
+          <span>Start this project</span>
+          <img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" />
+        </a>
       </div>
     </div>
 
     <ol class="process" data-fade>
-      <li><span class="mono">01</span><strong>Discovery</strong>We outline core product requirements, user flows, and technical constraints.</li>
-      <li><span class="mono">02</span><strong>Scope</strong>A clear written agreement detailing exact deliverables, fixed pricing, and project milestones.</li>
-      <li><span class="mono">03</span><strong>Build</strong>Weekly development sprints with interactive preview links for continuous feedback.</li>
-      <li><span class="mono">04</span><strong>Handover</strong>Live production deployment, clean repository access, and step-by-step setup guides.</li>
+      <li>
+        <span class="mono">01</span>
+        <strong>Discovery &amp; Architecture</strong>
+        We outline core product requirements, user flows, and technical stack upfront before writing code.
+      </li>
+      <li>
+        <span class="mono">02</span>
+        <strong>Transparent Scope</strong>
+        A clear roadmap detailing exact deliverables, milestones, and deliverables with no hidden surprises.
+      </li>
+      <li>
+        <span class="mono">03</span>
+        <strong>Weekly Staging Builds</strong>
+        Weekly sprints with live demo links so you can test real progress continuously on your phone and laptop.
+      </li>
+      <li>
+        <span class="mono">04</span>
+        <strong>Clean Handover</strong>
+        Live production deployment, 100% repository access, and documented setup guides for total independence.
+      </li>
     </ol>
   </section>
 
   <!-- ============ 07 ABOUT ============ -->
   <section class="section about" id="about" data-skew>
     <div class="section__head">
-      <span class="section__num mono">03</span>
       <h2 class="section__title" data-split>About</h2>
     </div>
     <div class="about__grid">
-      <p class="about__lead" data-fade>I started in network infrastructure before moving into full-stack software development.</p>
+      <p class="about__lead" data-fade>A web developer who builds software for real users and leads the community behind it</p>
       <div class="about__body">
-        <p data-fade>My technical background began in network engineering during an internship at PUSHANSIBER (Kemhan RI). Configuring routers, monitoring traffic, and resolving connectivity faults taught me to isolate root causes systematically instead of guessing.</p>
-        <p data-fade>Today, I study Informatics at Cyber University and lead the campus coding club (UKM Coding). I guide over 50 members through structured workshops, code reviews, and collaborative team builds using TypeScript, React, Next.js, and PostgreSQL.</p>
-        <p data-fade>Across web applications and IoT systems, I prioritize clean database architecture, comprehensive error states, and responsive performance on real mobile networks.</p>
+        <p data-fade>I study Information Technology at Cyber University and serve as President of UKM Coding, following a term as Vice President. Over the past two years, I have chaired campus tech events, spoken at community workshops, and coordinated project teams across different technical tracks.</p>
+        <p data-fade>My hands-on work covers independent freelancing and community software. I build custom websites for businesses, developed the official UKM Coding platform, created CodeQuest for developer challenges, and engineered a WordPress news CMS during my internship at Jakarta Hitz (Millenial News Group).</p>
+        <p data-fade>I like working on hard problems and seeing them through to the end. I write code that is clean and easy to read, test everything on real phones, and keep communication clear while building. When I take on a project, I stick with it until it runs properly in production.</p>
       </div>
     </div>
   </section>
@@ -317,10 +420,10 @@ const andalasiaRoute = `${base}work/andalasia/`;
         <a class="contact__mail" href="mailto:randdevs54@gmail.com" data-magnetic>randdevs54@gmail.com</a>
         <p class="contact__note" data-fade>Tell me about your project scope and target launch date. I reply within 24 hours.</p>
         <div class="contact__socials">
-          <a href="https://github.com/randevough" target="_blank" rel="noopener">GitHub <span><span class="arw">&#8599;</span></span></a>
-          <a href="https://www.linkedin.com/in/muhamad-rafi-fernanda-5248a0301/" target="_blank" rel="noopener">LinkedIn <span><span class="arw">&#8599;</span></span></a>
-          <a href="https://wa.me/62XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp <span><span class="arw">&#8599;</span></span></a>
-          <a href="https://instagram.com/randevough" target="_blank" rel="noopener">Instagram <span><span class="arw">&#8599;</span></span></a>
+          <a href="https://github.com/randevough" target="_blank" rel="noopener">GitHub <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+          <a href="https://www.linkedin.com/in/muhamad-rafi-fernanda-5248a0301/" target="_blank" rel="noopener">LinkedIn <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+          <a href="https://wa.me/62XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+          <a href="https://instagram.com/randevough" target="_blank" rel="noopener">Instagram <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
         </div>
       </div>
 

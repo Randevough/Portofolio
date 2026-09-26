@@ -11,7 +11,7 @@ const base = import.meta.env.BASE_URL;
 >
   <main id="top">
     <section class="cs">
-      <a class="cs__back" href={`${base}#work`}><span><span class="arw arw--left">&#8592;</span></span> All work</a>
+      <a class="cs__back" href={`${base}#work`}><span><img class="arw arw--left" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span> All work</a>
       <h1 class="cs__title" data-split>Andalasia Creative</h1>
       <p class="cs__lede" data-fade>Commercial website and production showcase for a Jakarta-based creative agency, built with React, Vite, and Tailwind CSS for mobile speed and conversion.</p>
 
@@ -19,7 +19,7 @@ const base = import.meta.env.BASE_URL;
         <div data-fade><span>Role</span>Frontend developer</div>
         <div data-fade style="--d:70ms"><span>Year</span>2024</div>
         <div data-fade style="--d:140ms"><span>Stack</span>React · Vite · Tailwind CSS · JavaScript</div>
-        <div data-fade style="--d:210ms"><span>Status</span><a href="https://andalasiagroup.com/" target="_blank" rel="noopener" style="color:var(--accent);">Live site &#8599;</a></div>
+        <div data-fade style="--d:210ms"><span>Status</span><a href="https://andalasiagroup.com/" target="_blank" rel="noopener" style="color:var(--accent);">Live site <img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></a></div>
       </div>
 
       <div class="cs__hero" data-fade><img src={`${base}assets/work-andalasia.png`} alt="Andalasia Creative production website"></div>
@@ -81,7 +81,7 @@ const base = import.meta.env.BASE_URL;
     <div class="cs__next">
       <a href={`${base}work/codequest/`} data-pt data-magnetic>
         <div><span class="mono">Next</span><br><strong>CodeQuest</strong></div>
-        <span><span class="arw arw--right">&#8594;</span></span>
+        <span><img class="arw arw--right" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span>
       </a>
     </div>
   </main>

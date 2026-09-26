@@ -11,7 +11,7 @@ const base = import.meta.env.BASE_URL;
 >
   <main id="top">
     <section class="cs">
-      <a class="cs__back" href={`${base}#work`}><span><span class="arw arw--left">&#8592;</span></span> All work</a>
+      <a class="cs__back" href={`${base}#work`}><span><img class="arw arw--left" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span> All work</a>
       <h1 class="cs__title" data-split>AksaraNetra</h1>
       <p class="cs__lede" data-fade>An automated web accessibility audit engine and real-time reader mode for Indonesian public websites, built with Next.js, Node.js, and headless Playwright.</p>
 
@@ -19,7 +19,7 @@ const base = import.meta.env.BASE_URL;
         <div data-fade><span>Role</span>Full-stack engineer</div>
         <div data-fade style="--d:70ms"><span>Year</span>2025</div>
         <div data-fade style="--d:140ms"><span>Stack</span>Next.js · Node.js · TypeScript · Playwright</div>
-        <div data-fade style="--d:210ms"><span>Status</span><a href="https://aksaranetra.vercel.app/" target="_blank" rel="noopener" style="color:var(--accent);">Live demo &#8599;</a></div>
+        <div data-fade style="--d:210ms"><span>Status</span><a href="https://aksaranetra.vercel.app/" target="_blank" rel="noopener" style="color:var(--accent);">Live demo <img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></a></div>
       </div>
 
       <div class="cs__hero" data-fade><img src={`${base}assets/work-aksaranetra.png`} alt="AksaraNetra accessibility audit dashboard"></div>
@@ -82,7 +82,7 @@ const base = import.meta.env.BASE_URL;
     <div class="cs__next">
       <a href={`${base}work/ukm-coding/`} data-pt data-magnetic>
         <div><span class="mono">Next</span><br><strong>UKM Coding</strong></div>
-        <span><span class="arw arw--right">&#8594;</span></span>
+        <span><img class="arw arw--right" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span>
       </a>
     </div>
   </main>

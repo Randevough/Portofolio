@@ -28,7 +28,7 @@ const indexPrefix = isCaseStudy ? base : "";
       {isCaseStudy ? (
         <a class="btn" href={`${base}#contact`} data-magnetic><span>Contact</span></a>
       ) : (
-        <a class="btn" href={cvPath} data-magnetic><span>Resume</span><span><span class="arw">&#8599;</span></span></a>
+        <a class="btn" href={cvPath} data-magnetic><span>Resume</span><span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
       )}
     </div>
     {!isCaseStudy && (
@@ -46,7 +46,7 @@ const indexPrefix = isCaseStudy ? base : "";
     <a href="#contact"><span>05</span>Contact</a>
     <div class="navmenu__foot">
       <a href="mailto:randdevs54@gmail.com">randdevs54@gmail.com</a>
-      <a href={cvPath}>Resume <span class="arw">&#8599;</span></a>
+      <a href={cvPath}>Resume <img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></a>
     </div>
   </div>
 )}

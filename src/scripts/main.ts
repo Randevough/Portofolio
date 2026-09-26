@@ -499,6 +499,22 @@ import { sound } from './audio';
           }
         });
     });
+
+    /* Quick inquiry pre-fill from Services cards */
+    var svcButtons = $$('[data-svc-inquire]');
+    svcButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var msg = btn.getAttribute('data-svc-msg');
+        if (ta && msg) {
+          ta.value = msg;
+          ta.dispatchEvent(new Event('input', { bubbles: true }));
+          setTimeout(function () {
+            ta.focus();
+            ta.setSelectionRange(ta.value.length, ta.value.length);
+          }, 850);
+        }
+      });
+    });
   }
 
   /* ---------------------------------------------------------------
