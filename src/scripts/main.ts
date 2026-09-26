@@ -84,16 +84,16 @@ import { sound } from './audio';
   ];
 
   var ROLES: RoleItem[] = [
-    { year: '2025 - Present', role: 'Freelance Web Developer', org: 'Client Projects', tag: 'Production',
+    { year: '2025 - Present', role: 'Freelance Web Developer', org: 'Client Projects', tag: 'Current',
       detail: 'Build custom websites and web applications for business clients, including Andalasia Creative. Handle frontend layouts, CMS setup, and live deployments on production servers.' },
-    { year: '2024 - Present', role: 'Club President', org: 'UKM Coding, Cyber University', tag: 'Current',
+    { year: '2024 - Present', role: 'Community Lead & President', org: 'UKM Coding, Cyber University', tag: 'Leadership',
       detail: 'Lead a campus developer community of 60+ members after serving as Vice President in 2024. Plan workshop schedules, manage club project repositories, and guide students building web applications.' },
     { year: '2026', role: 'Web Developer Intern', org: 'JakartaHitz, MillenialNews Group', tag: 'Internship',
       detail: 'Maintain and build responsive templates for an active digital news portal. Work with WordPress CMS and optimize media assets to keep pages loading fast for mobile readers.' },
     { year: '2026', role: 'Frontend Instructor', org: 'UKM Coding', tag: 'Teaching',
       detail: 'Taught a practical web development course for 30 university students under UKM Coding (NGOEPI initiative). Guided participants through HTML, CSS, and JavaScript basics up to deploying their first live websites.' },
     { year: '2025', role: 'International Project Lead', org: 'Cyber University', tag: 'Management',
-      detail: 'Led the organizing committee for DECOMPE 4.0, a cross-border UI/UX design competition and bootcamp between Indonesia and Malaysia. Managed cross-team operations, workshop schedules, and participant logistics.' },
+      detail: 'Led the organizing committee for DECOMPE 4.0, an online UI/UX design competition and bootcamp between Indonesia and Malaysia. Coordinated cross-team execution, live workshop sessions, and participant communications.' },
     { year: '2023', role: 'Network Engineer Intern', org: 'PUSHANSIBER, Kemhan RI', tag: 'Infrastructure',
       detail: 'Assisted network operations: configured MikroTik routers and switches, monitored office network traffic, and troubleshot hardware connectivity in defense facilities.' }
   ];
