@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1916"/>
+      <stop offset="100%" stop-color="#121211"/>
+    </linearGradient>
+    <linearGradient id="orangeGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5D33"/>
+      <stop offset="100%" stop-color="#FF3805"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Container Base -->
+  <rect width="128" height="128" rx="30" fill="url(#bg)"/>
+  <rect x="1.5" y="1.5" width="125" height="125" rx="28.5" fill="none" stroke="#2B2A26" stroke-width="2"/>
+
+  <!-- Geometric Monogram "R" -->
+  <!-- Vertical Pillar -->
+  <path d="M34 30C34 27.79 35.79 26 38 26H52C54.21 26 56 27.79 56 30V98C56 100.21 54.21 102 52 102H38C35.79 102 34 100.21 34 98V30Z" fill="#F5F5F2"/>
+
+  <!-- Upper Loop -->
+  <path d="M52 26H76C89.25 26 98 34.75 98 47C98 59.25 89.25 68 76 68H52V52H74C77.31 52 80 49.31 80 46C80 42.69 77.31 40 74 40H52V26Z" fill="#F5F5F2"/>
+
+  <!-- Vibrant Brand Accent Leg (The Signature Forward Strike) -->
+  <path d="M64 64C64 64 73 64 77 68L96.5 96C98.2 98.4 96.5 102 93 102H76.5C74.5 102 72.8 101 71.6 99.4L56 76V64H64Z" fill="url(#orangeGlow)"/>
+
+  <!-- System Beacon Dot -->
+  <circle cx="94" cy="30" r="5" fill="#FF4A1C"/>
+</svg>
