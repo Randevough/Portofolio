@@ -12,3 +12,5 @@ CV_PROFILE.md
 # Local agent skills and configurations
 .agents/
 
+# Scratch debugging and analysis scripts
+scratch/

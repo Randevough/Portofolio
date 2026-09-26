@@ -783,22 +783,6 @@ import { sound } from './audio';
           }
         }
       });
-
-      panels.forEach(function (pnl) {
-        var img = $('img', pnl);
-        if (!img) return;
-        gsap.fromTo(img, { xPercent: -5 }, {
-          xPercent: 5, ease: 'none',
-          scrollTrigger: {
-            trigger: pnl,
-            containerAnimation: hTween,
-            start: 'left right',
-            end: 'right left',
-            scrub: true,
-            invalidateOnRefresh: true
-          }
-        });
-      });
     }
 
     var skewEls = $$('[data-skew]');
