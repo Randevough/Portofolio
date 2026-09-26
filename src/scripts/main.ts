@@ -93,7 +93,7 @@ import { sound } from './audio';
     { year: '2026', role: 'Frontend Instructor', org: 'UKM Coding', tag: 'Teaching',
       detail: 'Taught a practical web development course for 30 university students under UKM Coding (NGOEPI initiative). Guided participants through HTML, CSS, and JavaScript basics up to deploying their first live websites.' },
     { year: '2025', role: 'International Project Lead', org: 'Cyber University', tag: 'Management',
-      detail: 'Led the organizing committee for DECOMPE 4.0, a cross-border UI/UX design competition and bootcamp between Indonesia and Malaysia. Managed event operations, workshop schedules, and judging criteria for student teams.' },
+      detail: 'Led the organizing committee for DECOMPE 4.0, a cross-border UI/UX design competition and bootcamp between Indonesia and Malaysia. Managed cross-team operations, workshop schedules, and participant logistics.' },
     { year: '2023', role: 'Network Engineer Intern', org: 'PUSHANSIBER, Kemhan RI', tag: 'Infrastructure',
       detail: 'Assisted network operations: configured MikroTik routers and switches, monitored office network traffic, and troubleshot hardware connectivity in defense facilities.' }
   ];
