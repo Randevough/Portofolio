@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://rafifernanda.site/sitemap-index.xml
+Sitemap: https://rafifernanda.site/sitemap.xml
