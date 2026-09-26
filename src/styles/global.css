@@ -513,7 +513,7 @@ html.motion .hero.is-pushed .hero__inner{transform:none;}
 .about__body p:last-child{margin-bottom:0;}
 
 /* ---------- 13 EXPERIENCE ---------- */
-.exp{padding-top:clamp(32px,4.5vh,56px);}
+.exp{padding-top:clamp(32px,4.5vh,56px);padding-bottom:clamp(36px,5vh,64px);}
 .exp .section__head{grid-template-columns:1fr auto;padding-bottom:0;margin-bottom:clamp(24px,3.5vh,40px);}
 .exp .section__head::after{display:none;}
 .rows{border-top:1px solid var(--line);}
@@ -539,6 +539,8 @@ html.motion .hero.is-pushed .hero__inner{transform:none;}
   padding:0 var(--row-pad-x) 24px calc(var(--row-pad-x) + var(--row-year-w) + var(--row-gap));}
 
 /* ---------- 14 STACK ---------- */
+.stack{padding-top:clamp(36px,5vh,64px);padding-bottom:clamp(40px,6vh,72px);}
+.stack .section__head{grid-template-columns:1fr auto;padding-bottom:clamp(14px,2vh,22px);margin-bottom:clamp(28px,4vh,44px);}
 .stack__wrap{display:grid;grid-template-columns:1.35fr .65fr;gap:clamp(30px,5vw,80px);align-items:start;}
 .stack__list{display:flex;flex-wrap:wrap;gap:10px 0;align-items:baseline;}
 .stack__item{font-size:clamp(1.25rem,3.2vw,2.6rem);font-weight:500;letter-spacing:-.04em;
