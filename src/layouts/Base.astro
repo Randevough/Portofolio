@@ -13,6 +13,7 @@ interface Props {
   isCaseStudy?: boolean;
   showRail?: boolean;
   preloadImage?: string;
+  ogImage?: string;
 }
 
 const {
@@ -22,7 +23,53 @@ const {
   isCaseStudy = false,
   showRail = false,
   preloadImage,
+  ogImage,
 } = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://rafifernanda.site';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://rafifernanda.site');
+const socialImageURL = new URL(ogImage || 'assets/hero-poster.jpg', Astro.site || 'https://rafifernanda.site');
+
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      'url': siteUrl,
+      'name': 'Rafi Fernanda · Portfolio',
+      'description': 'Full-stack developer building web applications, APIs, and dashboards.',
+      'publisher': {
+        '@id': `${siteUrl}/#person`
+      },
+      'inLanguage': 'en-US'
+    },
+    {
+      '@type': 'Person',
+      '@id': `${siteUrl}/#person`,
+      'name': 'Rafi Fernanda',
+      'alternateName': ['Muhamad Rafi Fernanda', 'Randevough'],
+      'url': siteUrl,
+      'image': `${siteUrl}/assets/hero-poster.jpg`,
+      'jobTitle': 'Full-stack Developer',
+      'sameAs': [
+        'https://github.com/randevough',
+        'https://www.linkedin.com/in/muhamad-rafi-fernanda-5248a0301/',
+        'https://instagram.com/randevough'
+      ],
+      'knowsAbout': [
+        'Full-stack Development',
+        'TypeScript',
+        'React',
+        'Next.js',
+        'Astro',
+        'PostgreSQL',
+        'Node.js',
+        'API Architecture'
+      ]
+    }
+  ]
+};
 ---
 
 <!doctype html>
@@ -32,8 +79,35 @@ const {
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{title}</title>
 <meta name="description" content={description}>
+<link rel="canonical" href={canonicalURL}>
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="author" content="Muhamad Rafi Fernanda">
+<meta name="keywords" content="Rafi Fernanda, Muhamad Rafi Fernanda, Randevough, Full-stack Developer, Software Engineer, Web Developer Jakarta, TypeScript, Next.js, PostgreSQL">
 <meta name="theme-color" content="#121211">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={isCaseStudy ? 'article' : 'profile'}>
+<meta property="og:url" content={canonicalURL}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:image" content={socialImageURL}>
+<meta property="og:site_name" content="Rafi Fernanda">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content={canonicalURL}>
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={socialImageURL}>
+
+<!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Structured Data -->
+<script type="application/ld+json" is:inline set:html={JSON.stringify(schemaData)} />
+
 {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high">}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
