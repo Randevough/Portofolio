@@ -17,7 +17,7 @@ import { sound } from './audio';
   interface ProofItem {
     id: string;
     name: string;
-    meta: string;
+    url?: string;
   }
 
   interface StackItem {
@@ -50,33 +50,37 @@ import { sound } from './audio';
      DATA
      --------------------------------------------------------------- */
   var PROOF: ProofItem[] = [
-    { id: 'codequest',   name: 'CodeQuest',          meta: 'Platform · 2026' },
-    { id: 'aksaranetra', name: 'AksaraNetra',        meta: 'Audit engine · 2025' },
-    { id: 'ukm',         name: 'UKM Coding',         meta: 'Editorial CMS · 2025' },
-    { id: 'andalasia',   name: 'Andalasia Creative', meta: 'Agency site · 2024' },
-    { id: 'robonetra',   name: 'Robonetra',          meta: 'Assistive IoT · 2024' },
-    { id: 'jakartahitz', name: 'JakartaHitz',        meta: 'Web dev · 2024' },
-    { id: 'ngoepi',      name: 'NGOEPI',             meta: 'Teaching · 2023' },
-    { id: 'pushansiber', name: 'PUSHANSIBER',        meta: 'Network · 2022' }
+    { id: 'codequest',   name: 'CodeQuest',          url: 'https://github.com/Randevough/CodeQuest' },
+    { id: 'aksaranetra', name: 'AksaraNetra',        url: 'https://aksaranetra.vercel.app/' },
+    { id: 'ukm',         name: 'UKM Coding',         url: 'https://ukmcoding.site/' },
+    { id: 'budayatutur', name: 'Budaya Tutur',       url: 'https://budayatutur.id/' },
+    { id: 'songunlocked',name: 'SongUnlocked',       url: 'https://github.com/Randevough/SongUnlocked-2.0' },
+    { id: 'andalasia',   name: 'Andalasia Creative', url: 'https://andalasiagroup.com/' },
+    { id: 'robonetra',   name: 'Robonetra',          url: 'https://github.com/Randevough/Robonetra' },
+    { id: 'jakartahitz', name: 'JakartaHitz',        url: 'https://jakartahitz.com/' },
+    { id: 'pushansiber', name: 'PUSHANSIBER' }
   ];
 
   var STACK: StackItem[] = [
-    { n: 'TypeScript',   key: 1, p: ['codequest', 'aksaranetra', 'ukm', 'jakartahitz'] },
-    { n: 'React',        key: 1, p: ['codequest', 'ukm', 'andalasia', 'jakartahitz', 'ngoepi'] },
+    { n: 'TypeScript',   key: 1, p: ['codequest', 'aksaranetra', 'ukm', 'songunlocked'] },
+    { n: 'React',        key: 1, p: ['codequest', 'ukm', 'andalasia', 'songunlocked'] },
     { n: 'Next.js',      key: 1, p: ['codequest', 'aksaranetra'] },
     { n: 'Astro',        key: 1, p: ['ukm'] },
-    { n: 'Node.js',      key: 0, p: ['codequest', 'aksaranetra'] },
-    { n: 'Prisma',       key: 1, p: ['codequest'] },
+    { n: 'Tailwind CSS', key: 1, p: ['codequest', 'andalasia', 'ukm', 'budayatutur'] },
+    { n: 'Laravel',      key: 1, p: ['budayatutur'] },
     { n: 'PostgreSQL',   key: 1, p: ['codequest'] },
+    { n: 'Prisma',       key: 1, p: ['codequest'] },
+    { n: 'Node.js',      key: 0, p: ['codequest', 'aksaranetra'] },
+    { n: 'PHP',          key: 0, p: ['budayatutur', 'jakartahitz'] },
+    { n: 'MySQL',        key: 0, p: ['budayatutur', 'jakartahitz'] },
+    { n: 'Vite',         key: 0, p: ['andalasia', 'budayatutur'] },
     { n: 'Supabase',     key: 0, p: ['codequest'] },
-    { n: 'Tailwind CSS', key: 1, p: ['codequest', 'andalasia', 'jakartahitz'] },
-    { n: 'Sanity CMS',   key: 0, p: ['ukm'] },
+    { n: 'REST APIs',    key: 0, p: ['codequest', 'aksaranetra', 'budayatutur'] },
+    { n: 'Headless CMS', key: 0, p: ['ukm'] },
+    { n: 'WordPress',    key: 0, p: ['jakartahitz'] },
     { n: 'NextAuth',     key: 0, p: ['codequest'] },
     { n: 'Playwright',   key: 0, p: ['aksaranetra'] },
-    { n: 'Git',          key: 0, p: ['codequest', 'aksaranetra', 'ukm', 'andalasia'] },
-    { n: 'Vercel',       key: 0, p: ['codequest', 'aksaranetra'] },
-    { n: 'Figma',        key: 0, p: ['codequest', 'ukm', 'ngoepi'] },
-    { n: 'Linux',        key: 0, p: ['pushansiber', 'codequest', 'aksaranetra'] },
+    { n: 'Git',          key: 0, p: ['codequest', 'aksaranetra', 'ukm', 'andalasia', 'budayatutur', 'songunlocked'] },
     { n: 'Arduino',      key: 0, p: ['robonetra'] },
     { n: 'C / C++',      key: 0, p: ['robonetra'] },
     { n: 'MikroTik',     key: 0, p: ['pushansiber'] },
@@ -126,8 +130,14 @@ import { sound } from './audio';
 
   if (stackHost && proofHost) {
     proofHost.innerHTML = PROOF.map(function (p) {
-      return '<li data-proof-id="' + p.id + '">' +
-        '<b>' + esc(p.name) + '</b><span>' + esc(p.meta) + '</span></li>';
+      if (p.url) {
+        return '<li data-proof-id="' + p.id + '">' +
+          '<a href="' + esc(p.url) + '" target="_blank" rel="noopener" class="proof__link">' +
+          '<b>' + esc(p.name) + '</b>' +
+          '<span class="proof__arw" aria-hidden="true"><svg viewBox="0 0 10 10" width="10" height="10" fill="none"><path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+          '</a></li>';
+      }
+      return '<li data-proof-id="' + p.id + '"><span class="proof__static"><b>' + esc(p.name) + '</b></span></li>';
     }).join('');
 
     stackHost.innerHTML = STACK.map(function (t, i) {
@@ -144,7 +154,7 @@ import { sound } from './audio';
         el.classList.remove('is-on');
         el.classList.remove('is-dim');
       });
-      if (stackHint) stackHint.textContent = 'All tools — ' + PROOF.length + ' shipped projects & roles';
+      if (stackHint) stackHint.textContent = 'All tools: ' + PROOF.length + ' projects & platforms';
     };
 
     var litStack = function (i: number) {
@@ -158,7 +168,7 @@ import { sound } from './audio';
         el.classList.toggle('is-dim', !hit);
       });
       if (stackHint) {
-        stackHint.textContent = t.n + ' — used in ' + t.p.length + (t.p.length > 1 ? ' places' : ' place');
+        stackHint.textContent = t.n + ': used in ' + t.p.length + (t.p.length > 1 ? ' projects' : ' project');
       }
     };
 
