@@ -6,4 +6,7 @@ export default defineConfig({
   site: 'https://randevough.github.io',
   base: '/Portofolio/',
   integrations: [sitemap()],
+  devToolbar: {
+    enabled: false,
+  },
 });

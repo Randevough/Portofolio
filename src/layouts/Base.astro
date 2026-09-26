@@ -12,6 +12,7 @@ interface Props {
   showLoader?: boolean;
   isCaseStudy?: boolean;
   showRail?: boolean;
+  preloadImage?: string;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   showLoader = false,
   isCaseStudy = false,
   showRail = false,
+  preloadImage,
 } = Astro.props;
 ---
 
@@ -30,10 +32,14 @@ const {
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{title}</title>
 <meta name="description" content={description}>
-<meta name="theme-color" content="#0A0A0A">
+<meta name="theme-color" content="#121211">
+{preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high">}
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.setAttribute('media', 'all')">
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</noscript>
 <script is:inline>
 (function(){var d=document.documentElement,c=[];
 try{

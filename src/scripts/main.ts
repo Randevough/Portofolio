@@ -1,4 +1,5 @@
 import { sound } from './audio';
+import { STACK, PROOF } from '../data/portfolio';
 
 /* =================================================================
    RANDEVOUGH — STUDIO GROTESK
@@ -14,26 +15,6 @@ import { sound } from './audio';
   'use strict';
   sound.bindAutoListeners();
 
-  interface ProofItem {
-    id: string;
-    name: string;
-    url?: string;
-  }
-
-  interface StackItem {
-    n: string;
-    key: number;
-    p: string[];
-  }
-
-  interface RoleItem {
-    year: string;
-    role: string;
-    org: string;
-    tag: string;
-    detail: string;
-  }
-
   var html = document.documentElement;
   var HAS_GSAP = !!(window.gsap && window.ScrollTrigger);
   var DESKTOP = '(min-width: 821px)';
@@ -47,104 +28,13 @@ import { sound } from './audio';
   var esc = function (s: string): string { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
 
   /* ---------------------------------------------------------------
-     DATA
-     --------------------------------------------------------------- */
-  var PROOF: ProofItem[] = [
-    { id: 'codequest',   name: 'CodeQuest',          url: 'https://github.com/Randevough/CodeQuest' },
-    { id: 'aksaranetra', name: 'AksaraNetra',        url: 'https://aksaranetra.vercel.app/' },
-    { id: 'ukm',         name: 'UKM Coding',         url: 'https://ukmcoding.site/' },
-    { id: 'budayatutur', name: 'Budaya Tutur',       url: 'https://budayatutur.id/' },
-    { id: 'songunlocked',name: 'SongUnlocked',       url: 'https://github.com/Randevough/SongUnlocked-2.0' },
-    { id: 'andalasia',   name: 'Andalasia Creative', url: 'https://andalasiagroup.com/' },
-    { id: 'robonetra',   name: 'Robonetra',          url: 'https://github.com/Randevough/Robonetra' },
-    { id: 'jakartahitz', name: 'JakartaHitz',        url: 'https://jakartahitz.com/' },
-    { id: 'pushansiber', name: 'PUSHANSIBER' }
-  ];
-
-  var STACK: StackItem[] = [
-    { n: 'TypeScript',   key: 1, p: ['codequest', 'aksaranetra', 'ukm', 'songunlocked'] },
-    { n: 'React',        key: 1, p: ['codequest', 'ukm', 'andalasia', 'songunlocked'] },
-    { n: 'Next.js',      key: 1, p: ['codequest', 'aksaranetra'] },
-    { n: 'Astro',        key: 1, p: ['ukm'] },
-    { n: 'Tailwind CSS', key: 1, p: ['codequest', 'andalasia', 'ukm', 'budayatutur'] },
-    { n: 'Laravel',      key: 1, p: ['budayatutur'] },
-    { n: 'PostgreSQL',   key: 1, p: ['codequest'] },
-    { n: 'Prisma',       key: 1, p: ['codequest'] },
-    { n: 'Node.js',      key: 0, p: ['codequest', 'aksaranetra'] },
-    { n: 'PHP',          key: 0, p: ['budayatutur', 'jakartahitz'] },
-    { n: 'MySQL',        key: 0, p: ['budayatutur', 'jakartahitz'] },
-    { n: 'Vite',         key: 0, p: ['andalasia', 'budayatutur'] },
-    { n: 'Supabase',     key: 0, p: ['codequest'] },
-    { n: 'REST APIs',    key: 0, p: ['codequest', 'aksaranetra', 'budayatutur'] },
-    { n: 'Headless CMS', key: 0, p: ['ukm'] },
-    { n: 'WordPress',    key: 0, p: ['jakartahitz'] },
-    { n: 'NextAuth',     key: 0, p: ['codequest'] },
-    { n: 'Playwright',   key: 0, p: ['aksaranetra'] },
-    { n: 'Git',          key: 0, p: ['codequest', 'aksaranetra', 'ukm', 'andalasia', 'budayatutur', 'songunlocked'] },
-    { n: 'Arduino',      key: 0, p: ['robonetra'] },
-    { n: 'C / C++',      key: 0, p: ['robonetra'] },
-    { n: 'MikroTik',     key: 0, p: ['pushansiber'] },
-    { n: 'Networking',   key: 0, p: ['pushansiber'] }
-  ];
-
-  var ROLES: RoleItem[] = [
-    { year: '2025 - Present', role: 'Freelance Web Developer', org: 'Client Projects', tag: 'Current',
-      detail: 'Build custom websites and web applications for business clients, including Andalasia Creative. Handle frontend layouts, CMS setup, and live deployments on production servers.' },
-    { year: '2024 - Present', role: 'Community Lead & President', org: 'UKM Coding, Cyber University', tag: 'Leadership',
-      detail: 'Lead a campus developer community of 60+ members after serving as Vice President in 2024. Plan workshop schedules, manage club project repositories, and guide students building web applications.' },
-    { year: '2026', role: 'Web Developer Intern', org: 'JakartaHitz, MillenialNews Group', tag: 'Internship',
-      detail: 'Maintain and build responsive templates for an active digital news portal. Work with WordPress CMS and optimize media assets to keep pages loading fast for mobile readers.' },
-    { year: '2026', role: 'Frontend Instructor', org: 'UKM Coding', tag: 'Teaching',
-      detail: 'Taught a practical web development course for 30 university students under UKM Coding (NGOEPI initiative). Guided participants through HTML, CSS, and JavaScript basics up to deploying their first live websites.' },
-    { year: '2025', role: 'International Project Lead', org: 'Cyber University', tag: 'Management',
-      detail: 'Led the organizing committee for DECOMPE 4.0, an online UI/UX design competition and bootcamp between Indonesia and Malaysia. Coordinated cross-team execution, live workshop sessions, and participant communications.' },
-    { year: '2023', role: 'Network Engineer Intern', org: 'PUSHANSIBER, Kemhan RI', tag: 'Infrastructure',
-      detail: 'Assisted network operations: configured MikroTik routers and switches, monitored office network traffic, and troubleshot hardware connectivity in defense facilities.' }
-  ];
-
-  /* ---------------------------------------------------------------
-     RENDER: experience rows
-     --------------------------------------------------------------- */
-  var rowsHost = $('[data-rows]');
-  if (rowsHost) {
-    rowsHost.innerHTML = ROLES.map(function (r, i) {
-      var now = r.tag === 'Current' ? ' row__tag--now' : '';
-      return '<div class="row" data-fade style="--d:' + (i % 3) * 60 + 'ms">' +
-        '<div class="row__main">' +
-          '<span class="row__year">' + esc(r.year) + '</span>' +
-          '<h3 class="row__role">' + esc(r.role) + '</h3>' +
-          '<span class="row__org">' + esc(r.org) + '</span>' +
-          '<span class="row__tag' + now + '">' + esc(r.tag) + '</span>' +
-        '</div>' +
-        '<div class="row__detail"><p>' + esc(r.detail) + '</p></div>' +
-      '</div>';
-    }).join('');
-  }
-
-  /* ---------------------------------------------------------------
-     RENDER: stack evidence map
+     INTERACTION: stack evidence map (DOM rendered statically in Astro)
      --------------------------------------------------------------- */
   var stackHost = $('[data-stack]');
   var proofHost = $('[data-proof]');
   var stackHint = $('[data-stack-hint]');
 
   if (stackHost && proofHost) {
-    proofHost.innerHTML = PROOF.map(function (p) {
-      if (p.url) {
-        return '<li data-proof-id="' + p.id + '">' +
-          '<a href="' + esc(p.url) + '" target="_blank" rel="noopener" class="proof__link">' +
-          '<b>' + esc(p.name) + '</b>' +
-          '<span class="proof__arw" aria-hidden="true"><svg viewBox="0 0 10 10" width="10" height="10" fill="none"><path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
-          '</a></li>';
-      }
-      return '<li data-proof-id="' + p.id + '"><span class="proof__static"><b>' + esc(p.name) + '</b></span></li>';
-    }).join('');
-
-    stackHost.innerHTML = STACK.map(function (t, i) {
-      return '<button type="button" class="stack__item' + (t.key ? ' is-key' : '') +
-        '" data-tech="' + i + '" data-fade style="--d:' + (i % 7) * 40 + 'ms">' + esc(t.n) + '</button>';
-    }).join('');
-
     var proofItems = $$('[data-proof-id]', proofHost);
     var techItems = $$('.stack__item', stackHost);
 
@@ -160,6 +50,7 @@ import { sound } from './audio';
     var litStack = function (i: number) {
       sound.playStackHover(i);
       var t = STACK[i];
+      if (!t) return;
       techItems.forEach(function (el, k) { el.classList.toggle('is-active', k === i); });
       proofItems.forEach(function (el) {
         var attr = el.getAttribute('data-proof-id');
@@ -187,6 +78,7 @@ import { sound } from './audio';
      SPLIT WORDS (staggered via CSS custom property)
      --------------------------------------------------------------- */
   $$('[data-split]').forEach(function (el) {
+    if (el.querySelector('.word')) return;
     var words = (el.textContent || '').trim().split(/\s+/);
     el.innerHTML = words.map(function (w, i) {
       return '<span class="word"><span style="--d:' + (i * 45) + 'ms">' + esc(w) + '</span></span>';
@@ -544,9 +436,10 @@ import { sound } from './audio';
         if (ta && msg) {
           ta.value = msg;
           ta.dispatchEvent(new Event('input', { bubbles: true }));
+          var textarea = ta;
           setTimeout(function () {
-            ta.focus();
-            ta.setSelectionRange(ta.value.length, ta.value.length);
+            textarea.focus();
+            textarea.setSelectionRange(textarea.value.length, textarea.value.length);
           }, 850);
         }
       });
@@ -556,13 +449,14 @@ import { sound } from './audio';
     var copyBtn = $('[data-copy-email]') as HTMLButtonElement | null;
     var copyLabel = $('[data-copy-label]') as HTMLElement | null;
     if (copyBtn) {
-      copyBtn.addEventListener('click', function () {
-        var email = copyBtn.getAttribute('data-copy-email') || 'muhamadrafifernanda@gmail.com';
+      var cBtn = copyBtn;
+      cBtn.addEventListener('click', function () {
+        var email = cBtn.getAttribute('data-copy-email') || 'muhamadrafifernanda@gmail.com';
         var handleSuccess = function () {
-          copyBtn.classList.add('is-copied');
+          cBtn.classList.add('is-copied');
           if (copyLabel) copyLabel.textContent = 'Copied! ✓';
           setTimeout(function () {
-            copyBtn.classList.remove('is-copied');
+            cBtn.classList.remove('is-copied');
             if (copyLabel) copyLabel.textContent = 'Copy';
           }, 2400);
         };
@@ -604,6 +498,31 @@ import { sound } from './audio';
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var isCanvasReady = false;
 
+    interface TextSpanCache {
+      text: string;
+      font: string;
+      letterSpacing?: string;
+      x: number;
+      y: number;
+    }
+    var textCache: TextSpanCache[] = [];
+
+    var updateMetrics = function () {
+      if (!heroMask || !heroTitleEl) return;
+      var maskRect = heroMask.getBoundingClientRect();
+      textCache = lineSpans.map(function (span) {
+        var spanRect = span.getBoundingClientRect();
+        var style = window.getComputedStyle(span);
+        return {
+          text: span.textContent || '',
+          font: style.fontWeight + ' ' + style.fontSize + ' ' + style.fontFamily,
+          letterSpacing: ('letterSpacing' in style) ? (style as any).letterSpacing : undefined,
+          x: spanRect.left - maskRect.left,
+          y: spanRect.top - maskRect.top
+        };
+      });
+    };
+
     var resizeCanvas = function () {
       if (!heroMask || !heroCanvas) return;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -614,6 +533,7 @@ import { sound } from './audio';
       heroCanvas.height = Math.round(rect.height * dpr);
       heroCanvas.style.width = rect.width + 'px';
       heroCanvas.style.height = rect.height + 'px';
+      updateMetrics();
     };
 
     var renderMask = function () {
@@ -631,25 +551,17 @@ import { sound } from './audio';
       context.scale(dpr, dpr);
       context.clearRect(0, 0, cWidth, cHeight);
 
-      // 1. Draw Text as Destination Mask (pure crisp vector typography)
-      var maskRect = heroMask.getBoundingClientRect();
-      for (var i = 0; i < lineSpans.length; i++) {
-        var span = lineSpans[i];
-        var spanRect = span.getBoundingClientRect();
-        var style = window.getComputedStyle(span);
-        var text = span.textContent || '';
-
+      // 1. Draw Text as Destination Mask (cached metrics: 0 forced reflows)
+      for (var i = 0; i < textCache.length; i++) {
+        var item = textCache[i];
         context.save();
-        context.font = style.fontWeight + ' ' + style.fontSize + ' ' + style.fontFamily;
+        context.font = item.font;
         context.fillStyle = '#ffffff';
         context.textBaseline = 'top';
-        if ('letterSpacing' in context) {
-          (context as any).letterSpacing = style.letterSpacing;
+        if (item.letterSpacing && 'letterSpacing' in context) {
+          (context as any).letterSpacing = item.letterSpacing;
         }
-
-        var x = spanRect.left - maskRect.left;
-        var y = spanRect.top - maskRect.top;
-        context.fillText(text, x, y);
+        context.fillText(item.text, item.x, item.y);
         context.restore();
       }
 
@@ -697,6 +609,7 @@ import { sound } from './audio';
         resizeCanvas();
       });
     }
+    setTimeout(updateMetrics, 1200);
 
     var playPromise = heroVideo.play();
     if (playPromise && playPromise.catch) {
@@ -734,9 +647,9 @@ import { sound } from './audio';
 
   /* ---------- background warms on the human sections ---------- */
   var tintZones = [
-    { id: 'about', c: '#0C0B09' },
-    { id: 'experience', c: '#0C0B09' },
-    { id: 'contact', c: '#0B0A09' }
+    { id: 'about', c: '#161513' },
+    { id: 'experience', c: '#161513' },
+    { id: 'contact', c: '#141412' }
   ].map(function (z) { return { el: document.getElementById(z.id), c: z.c }; })
    .filter(function (z): z is { el: HTMLElement; c: string } { return !!z.el; });
 
@@ -755,7 +668,7 @@ import { sound } from './audio';
       } else if (!tintZones.some(function (z) {
         var r = z.el.getBoundingClientRect();
         return r.top < window.innerHeight * 0.5 && r.bottom > window.innerHeight * 0.5;
-      })) applyTint('#0A0A0A');
+      })) applyTint('#121211');
     }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
     tintZones.forEach(function (z) { tintObs.observe(z.el); });
   }
@@ -830,7 +743,6 @@ import { sound } from './audio';
   /* ---------- marquee ---------- */
   var mTrack = $('[data-marquee-track]');
   if (mTrack) {
-    mTrack.innerHTML = mTrack.innerHTML + mTrack.innerHTML;
     gsap.to(mTrack, { xPercent: -50, duration: 30, ease: 'none', repeat: -1 });
   }
 
@@ -893,7 +805,6 @@ import { sound } from './audio';
       };
       sizeFooter();
       window.addEventListener('resize', sizeFooter);
-      setTimeout(sizeFooter, 1200);
     }
 
     return function () {
