@@ -23,6 +23,8 @@ class DarkAudioEngine {
   private delayFilter: BiquadFilterNode | null = null;
   private lastStackTime: number = 0;
   private lastMagneticTime: number = 0;
+  private lastRowTime: number = 0;
+  private lastNextTime: number = 0;
   private lastTransitionTime: number = 0;
   private paperNoiseBuffer: AudioBuffer | null = null;
 
@@ -108,7 +110,7 @@ class DarkAudioEngine {
     if (!this.ctx || this.ctx.state !== 'running') return;
 
     const nowMs = performance.now();
-    if (nowMs - this.lastMagneticTime < 80) return;
+    if (nowMs - this.lastMagneticTime < 140) return;
     this.lastMagneticTime = nowMs;
 
     try {
@@ -132,21 +134,20 @@ class DarkAudioEngine {
   }
 
   /**
-   * Dark, low-frequency industrial encoder note with muted room echo for Tech Stack hovers
+   * Crisp, low-frequency industrial encoder note for Tech Stack hovers (single clean tone, no echo duplicate)
    */
   public playStackHover(index: number = 0) {
     this.initContext();
     if (!this.ctx || this.ctx.state !== 'running') return;
 
     const nowMs = performance.now();
-    if (nowMs - this.lastStackTime < 50) return;
+    if (nowMs - this.lastStackTime < 120) return;
     this.lastStackTime = nowMs;
 
     try {
       const now = this.ctx.currentTime;
       const freq = DARK_STACK_FREQUENCIES[Math.abs(index) % DARK_STACK_FREQUENCIES.length];
 
-      // Muted triangular sub-tone
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
       const filter = this.ctx.createBiquadFilter();
@@ -155,23 +156,18 @@ class DarkAudioEngine {
       osc.frequency.setValueAtTime(freq, now);
 
       filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(280, now);
-      filter.frequency.exponentialRampToValueAtTime(80, now + 0.18);
+      filter.frequency.setValueAtTime(260, now);
+      filter.frequency.exponentialRampToValueAtTime(70, now + 0.14);
 
-      gain.gain.setValueAtTime(0.12, now);
-      gain.gain.exponentialRampToValueAtTime(0.0005, now + 0.22);
+      gain.gain.setValueAtTime(0.10, now);
+      gain.gain.exponentialRampToValueAtTime(0.0005, now + 0.16);
 
       osc.connect(filter);
       filter.connect(gain);
       gain.connect(this.ctx.destination);
 
-      // Send to dark room feedback delay
-      if (this.delayNode) {
-        gain.connect(this.delayNode);
-      }
-
       osc.start(now);
-      osc.stop(now + 0.24);
+      osc.stop(now + 0.18);
     } catch {}
   }
 
@@ -212,6 +208,10 @@ class DarkAudioEngine {
     this.initContext();
     if (!this.ctx || this.ctx.state !== 'running') return;
 
+    const nowMs = performance.now();
+    if (nowMs - this.lastRowTime < 160) return;
+    this.lastRowTime = nowMs;
+
     try {
       const now = this.ctx.currentTime;
       const buffer = this.getPaperNoiseBuffer();
@@ -248,6 +248,10 @@ class DarkAudioEngine {
   public playNextProject() {
     this.initContext();
     if (!this.ctx || this.ctx.state !== 'running') return;
+
+    const nowMs = performance.now();
+    if (nowMs - this.lastNextTime < 250) return;
+    this.lastNextTime = nowMs;
 
     try {
       const now = this.ctx.currentTime;
@@ -383,12 +387,18 @@ class DarkAudioEngine {
       }
     }, { passive: true });
 
-    // Magnetic button snap
+    // Magnetic button snap (single trigger per element, ignore inner children)
+    let lastMagneticTarget: Element | null = null;
     if (document.documentElement.classList.contains('fine')) {
       document.addEventListener('pointerover', (e) => {
         const target = (e.target as Element)?.closest('[data-magnetic]');
         if (target && !target.classList.contains('stack__item')) {
-          this.playMagnetic();
+          if (target !== lastMagneticTarget) {
+            lastMagneticTarget = target;
+            this.playMagnetic();
+          }
+        } else {
+          lastMagneticTarget = null;
         }
       }, { passive: true });
     }
