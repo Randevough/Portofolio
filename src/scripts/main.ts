@@ -84,18 +84,18 @@ import { sound } from './audio';
   ];
 
   var ROLES: RoleItem[] = [
-    { year: '2025 – Present', role: 'Ketua UKM Coding', org: 'Cyber University', tag: 'Current',
-      detail: 'Leads the university coding club of 50+ members: develops curriculum roadmaps, coordinates project repositories, and mentors students through full-stack web builds.' },
-    { year: '2024 – 2025', role: 'Web Developer', org: 'JakartaHitz · MillenialNews Group', tag: 'Production',
-      detail: 'Developed and maintained responsive web layouts for an active digital news portal, optimizing asset delivery and page performance for high daily mobile traffic.' },
-    { year: '2024', role: 'Wakil Ketua UKM Coding', org: 'Cyber University', tag: 'Leadership',
-      detail: 'Coordinated workshop schedules, monitored project milestones, and organized pair-programming sessions between senior mentors and beginners.' },
-    { year: '2024', role: 'Ketua Pelaksana DECOMPE 4.0', org: 'ASEAN UI/UX Competition', tag: 'Management',
-      detail: 'Chaired the organizing committee for an international design competition with 51 participants, overseeing event operations, judging criteria, and schedule execution.' },
-    { year: '2023', role: 'Frontend Instructor', org: 'NGOEPI', tag: 'Teaching',
-      detail: 'Taught a five-part practical workshop series on responsive HTML/CSS layouts, JavaScript DOM APIs, and state management fundamentals.' },
-    { year: '2022 – 2023', role: 'Network Engineer Intern', org: 'PUSHANSIBER · Kemhan RI', tag: 'Infrastructure',
-      detail: 'Supported enterprise network operations: configured MikroTik routers and switches, monitored packet health, and diagnosed hardware connectivity issues.' }
+    { year: '2025 - Present', role: 'Freelance Web Developer', org: 'Client Projects', tag: 'Production',
+      detail: 'Build custom websites and web applications for business clients, including Andalasia Creative. Handle frontend layouts, CMS setup, and live deployments on production servers.' },
+    { year: '2024 - Present', role: 'Club President', org: 'UKM Coding, Cyber University', tag: 'Current',
+      detail: 'Lead a campus developer community of 60+ members after serving as Vice President in 2024. Plan workshop schedules, manage club project repositories, and guide students building web applications.' },
+    { year: '2026', role: 'Web Developer Intern', org: 'JakartaHitz, MillenialNews Group', tag: 'Internship',
+      detail: 'Maintain and build responsive templates for an active digital news portal. Work with WordPress CMS and optimize media assets to keep pages loading fast for mobile readers.' },
+    { year: '2026', role: 'Frontend Instructor', org: 'UKM Coding', tag: 'Teaching',
+      detail: 'Taught a practical web development course for 30 university students under UKM Coding (NGOEPI initiative). Guided participants through HTML, CSS, and JavaScript basics up to deploying their first live websites.' },
+    { year: '2025', role: 'International Project Lead', org: 'Cyber University', tag: 'Management',
+      detail: 'Led the organizing committee for DECOMPE 4.0, a cross-border UI/UX design competition and bootcamp between Indonesia and Malaysia. Managed event operations, workshop schedules, and judging criteria for student teams.' },
+    { year: '2023', role: 'Network Engineer Intern', org: 'PUSHANSIBER, Kemhan RI', tag: 'Infrastructure',
+      detail: 'Assisted network operations: configured MikroTik routers and switches, monitored office network traffic, and troubleshot hardware connectivity in defense facilities.' }
   ];
 
   /* ---------------------------------------------------------------
