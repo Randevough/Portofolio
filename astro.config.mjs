@@ -3,8 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://randevough.github.io',
-  base: '/Portofolio/',
+  site: 'https://rafifernanda.site',
   integrations: [sitemap()],
   devToolbar: {
     enabled: false,
