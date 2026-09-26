@@ -466,9 +466,28 @@ import { sound } from './audio';
 
       var key = form.querySelector('[name="access_key"]') as HTMLInputElement | null;
       if (key && key.value.indexOf('YOUR_') === 0) {
+        var nameInput = form.querySelector('[name="name"]') as HTMLInputElement | null;
+        var emailInput = form.querySelector('[name="email"]') as HTMLInputElement | null;
+        var msgInput = form.querySelector('[name="message"]') as HTMLTextAreaElement | null;
+        var senderName = nameInput ? nameInput.value.trim() : '';
+        var senderEmail = emailInput ? emailInput.value.trim() : '';
+        var senderMsg = msgInput ? msgInput.value.trim() : '';
+
+        var subject = encodeURIComponent('Project Inquiry from ' + (senderName || 'Portfolio Visitor'));
+        var body = encodeURIComponent(
+          'Hi Rafi,\n\n' +
+          (senderMsg ? senderMsg + '\n\n' : '') +
+          '---\n' +
+          'From: ' + senderName + '\n' +
+          'Email: ' + senderEmail
+        );
+        var gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=muhamadrafifernanda@gmail.com&su=' + subject + '&body=' + body;
+
+        window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+
         if (status) {
-          status.textContent = 'Form key not set — email me directly for now';
-          status.className = 'cform__status mono is-err';
+          status.textContent = 'Redirecting to Gmail with your inquiry...';
+          status.className = 'cform__status mono is-ok';
         }
         return;
       }
@@ -489,13 +508,20 @@ import { sound } from './audio';
           if (sendBtn) sendBtn.classList.remove('is-busy');
           if (!d || !d.success) throw new Error('rejected');
           if (sendBtn) sendBtn.classList.add('is-done');
-          if (sendLabel) sendLabel.textContent = 'Sent ✓';
+          if (sendLabel) sendLabel.textContent = 'Sent';
           if (status) {
-            status.textContent = 'Message received. I reply within a day.';
+            status.textContent = 'Message received. I will get back to you shortly.';
             status.className = 'cform__status mono is-ok';
           }
           if (form) form.reset();
           if (counter) counter.textContent = '0 / 600';
+          setTimeout(function () {
+            if (sendBtn) {
+              sendBtn.classList.remove('is-done');
+              sendBtn.disabled = false;
+            }
+            if (sendLabel) sendLabel.textContent = 'Send message';
+          }, 4500);
         })
         .catch(function () {
           if (sendBtn) {
@@ -504,7 +530,7 @@ import { sound } from './audio';
           }
           if (sendLabel) sendLabel.textContent = 'Try again';
           if (status) {
-            status.textContent = 'Something broke. Email randdevs54@gmail.com instead.';
+            status.textContent = 'Something broke. Email muhamadrafifernanda@gmail.com instead.';
             status.className = 'cform__status mono is-err';
           }
         });
@@ -525,6 +551,43 @@ import { sound } from './audio';
         }
       });
     });
+
+    /* 1-Click Copy Email to Clipboard */
+    var copyBtn = $('[data-copy-email]') as HTMLButtonElement | null;
+    var copyLabel = $('[data-copy-label]') as HTMLElement | null;
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function () {
+        var email = copyBtn.getAttribute('data-copy-email') || 'muhamadrafifernanda@gmail.com';
+        var handleSuccess = function () {
+          copyBtn.classList.add('is-copied');
+          if (copyLabel) copyLabel.textContent = 'Copied! ✓';
+          setTimeout(function () {
+            copyBtn.classList.remove('is-copied');
+            if (copyLabel) copyLabel.textContent = 'Copy';
+          }, 2400);
+        };
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(handleSuccess).catch(function () {
+            var taEl = document.createElement('textarea');
+            taEl.value = email;
+            document.body.appendChild(taEl);
+            taEl.select();
+            document.execCommand('copy');
+            document.body.removeChild(taEl);
+            handleSuccess();
+          });
+        } else {
+          var taEl = document.createElement('textarea');
+          taEl.value = email;
+          document.body.appendChild(taEl);
+          taEl.select();
+          document.execCommand('copy');
+          document.body.removeChild(taEl);
+          handleSuccess();
+        }
+      });
+    }
   }
 
   /* ---------------------------------------------------------------

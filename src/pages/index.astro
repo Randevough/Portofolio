@@ -407,16 +407,40 @@ const andalasiaRoute = `${base}work/andalasia/`;
   <!-- ============ 10 CONTACT ============ -->
   <section class="section contact" id="contact" data-skew>
     <div class="contact__top">
-      <span class="section__num mono">06</span>
       <h2 class="contact__title" data-contact-title>
         <span class="hero__line"><span>Let's build</span></span>
-        <span class="hero__line"><span>something solid.</span></span>
+        <span class="hero__line"><span>something solid</span></span>
       </h2>
     </div>
     <div class="contact__grid">
       <div class="contact__left">
-        <a class="contact__mail" href="mailto:randdevs54@gmail.com" data-magnetic>randdevs54@gmail.com</a>
-        <p class="contact__note" data-fade>Tell me about your project scope and target launch date. I reply within 24 hours.</p>
+        <div class="contact__mail-wrap">
+          <a
+            class="contact__mail"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=muhamadrafifernanda@gmail.com&su=Project%20Inquiry%20%7C%20Rafi%20Fernanda&body=Hi%20Rafi%2C%0A%0AI%20would%20like%20to%20discuss%20a%20project%20with%20you%3A%0A-%20Project%20Overview%3A%20%0A-%20Target%20Timeline%3A%20%0A-%20Estimated%20Budget%3A%20%0A%0ABest%20regards%2C"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-magnetic
+          >
+            <span>muhamadrafifernanda@gmail.com</span>
+            <span class="contact__mail-badge">Gmail ↗</span>
+          </a>
+          <button
+            type="button"
+            class="contact__copy"
+            data-copy-email="muhamadrafifernanda@gmail.com"
+            aria-label="Copy email address"
+            title="Copy email address"
+            data-magnetic
+          >
+            <svg class="contact__copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span class="contact__copy-label" data-copy-label>Copy</span>
+          </button>
+        </div>
+        <p class="contact__note" data-fade>Tell me about your project scope and timeline. I usually respond within a few hours.</p>
         <div class="contact__socials">
           <a href="https://github.com/randevough" target="_blank" rel="noopener">GitHub <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
           <a href="https://www.linkedin.com/in/muhamad-rafi-fernanda-5248a0301/" target="_blank" rel="noopener">LinkedIn <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
@@ -426,7 +450,9 @@ const andalasiaRoute = `${base}work/andalasia/`;
       </div>
 
       <form class="cform" data-cform action="https://api.web3forms.com/submit" method="POST" novalidate>
-        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+        <input type="hidden" name="access_key" value="97e9f108-e7ac-4b6b-b34a-d3fe0de6dd55">
+        <input type="hidden" name="subject" value="New Project Inquiry | Portfolio">
+        <input type="hidden" name="from_name" value="Portfolio Inquiries">
         <input type="checkbox" name="botcheck" class="cform__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
         <div class="field" data-field>
@@ -452,7 +478,14 @@ const andalasiaRoute = `${base}work/andalasia/`;
 
         <div class="cform__foot">
           <button class="send" type="submit" data-send data-magnetic>
-            <span data-send-label>Send message</span><i></i>
+            <span data-send-label>Send message</span>
+            <span class="send__arw"><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span>
+            <span class="send__check" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+            <i></i>
           </button>
           <p class="cform__status mono" data-cform-status role="status" aria-live="polite"></p>
         </div>
