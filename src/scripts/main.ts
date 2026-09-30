@@ -152,28 +152,6 @@ import { STACK, PROOF } from '../data/portfolio';
   }
 
   var loaderCount = $('[data-loader-count]');
-  var loaderWord = $('[data-loader-word]');
-  var WORDS = ['Building', 'Shipping', 'Debugging', 'Deploying'];
-
-  function runWords(endAt: number) {
-    if (!loaderWord) return;
-    var i = 0;
-    var swap = function (text: string, final: boolean) {
-      if (!loaderWord) return;
-      loaderWord.classList.add('is-swap');
-      setTimeout(function () {
-        if (!loaderWord) return;
-        loaderWord.textContent = text;
-        if (final) loaderWord.classList.add('is-final');
-        loaderWord.classList.remove('is-swap');
-      }, 170);
-    };
-    var id = setInterval(function () {
-      i++;
-      swap(WORDS[i % WORDS.length], false);
-    }, 320);
-    setTimeout(function () { clearInterval(id); swap('Ready', true); }, endAt);
-  }
 
   function runCounter(ms: number) {
     if (!loaderCount) return;
@@ -190,25 +168,29 @@ import { STACK, PROOF } from '../data/portfolio';
 
   var skipLoader = false;
   try {
-    skipLoader = sessionStorage.getItem('rv-skip-loader') === '1';
-    sessionStorage.removeItem('rv-skip-loader');
+    skipLoader = sessionStorage.getItem('rv-visited') === '1';
   } catch (err) { skipLoader = false; }
 
   if (!MOTION || skipLoader) {
     if (loader) loader.classList.add('is-ready', 'is-out', 'is-done');
     startHero();
   } else if (loader) {
+    try {
+      sessionStorage.setItem('rv-visited', '1');
+    } catch (err) {}
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         if (loader) loader.classList.add('is-ready');
-        runCounter(1450);
-        runWords(1400);
+        runCounter(1000);
       });
     });
     /* the loader leaving and the hero arriving are one movement */
-    setTimeout(function () { if (loader) loader.classList.add('is-out'); startHero(); }, 1800);
-    setTimeout(function () { if (loader) loader.classList.add('is-done'); }, 2800);
+    setTimeout(function () { if (loader) loader.classList.add('is-out'); startHero(); }, 1250);
+    setTimeout(function () { if (loader) loader.classList.add('is-done'); }, 2000);
   } else {
+    try {
+      sessionStorage.setItem('rv-visited', '1');
+    } catch (err) {}
     startHero();
   }
 
@@ -697,8 +679,8 @@ import { STACK, PROOF } from '../data/portfolio';
   /* ---------- page transition curtain ---------- */
   var curtain = $('[data-pt-curtain]');
   if (curtain && MOTION) {
-    window.addEventListener('pageshow', function (e) {
-      if (e.persisted && curtain) curtain.classList.remove('is-cover', 'is-on');
+    window.addEventListener('pageshow', function () {
+      if (curtain) curtain.classList.remove('is-cover', 'is-on');
     });
 
     document.addEventListener('click', function (e) {
@@ -710,13 +692,13 @@ import { STACK, PROOF } from '../data/portfolio';
       e.preventDefault();
       sound.playTransition();
       try {
-        sessionStorage.setItem('rv-skip-loader', '1');
+        sessionStorage.setItem('rv-visited', '1');
       } catch (err) {}
       if (curtain) {
         curtain.classList.add('is-cover');
         requestAnimationFrame(function () { if (curtain) curtain.classList.add('is-on'); });
       }
-      setTimeout(function () { if (href) window.location.href = href; }, 560);
+      setTimeout(function () { if (href) window.location.href = href; }, 380);
     });
   }
 
