@@ -37,6 +37,7 @@ import { STACK, PROOF } from '../data/portfolio';
   if (stackHost && proofHost) {
     var proofItems = $$('[data-proof-id]', proofHost);
     var techItems = $$('.stack__item', stackHost);
+    var lockedIndex: number | null = null;
 
     var clearStack = function () {
       techItems.forEach(function (el) { el.classList.remove('is-active'); });
@@ -47,8 +48,8 @@ import { STACK, PROOF } from '../data/portfolio';
       if (stackHint) stackHint.textContent = 'All tools: ' + PROOF.length + ' projects & platforms';
     };
 
-    var litStack = function (i: number) {
-      sound.playStackHover(i);
+    var litStack = function (i: number, playSound?: boolean) {
+      if (playSound !== false) sound.playStackHover(i);
       var t = STACK[i];
       if (!t) return;
       techItems.forEach(function (el, k) { el.classList.toggle('is-active', k === i); });
@@ -67,10 +68,24 @@ import { STACK, PROOF } from '../data/portfolio';
       el.addEventListener('mouseenter', function () { litStack(i); });
       el.addEventListener('focus', function () { litStack(i); });
       el.addEventListener('click', function () {
-        if (el.classList.contains('is-active')) clearStack(); else litStack(i);
+        if (lockedIndex === i) {
+          lockedIndex = null;
+          clearStack();
+        } else {
+          lockedIndex = i;
+          litStack(i);
+        }
       });
     });
-    stackHost.addEventListener('mouseleave', clearStack);
+
+    stackHost.addEventListener('mouseleave', function () {
+      if (lockedIndex !== null) {
+        litStack(lockedIndex, false);
+      } else {
+        clearStack();
+      }
+    });
+
     clearStack();
   }
 
