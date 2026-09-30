@@ -588,7 +588,8 @@ html.motion .hero.is-pushed .hero__inner{transform:none;}
 .contact__top{padding-bottom:clamp(22px,3.5vh,40px);}
 .contact__title{font-size:clamp(2.2rem,8.4vw,7.4rem);line-height:1;letter-spacing:-.05em;
   font-weight:600;margin-top:0;}
-.contact__title .hero__line{padding-bottom:.04em;}
+.contact__title .contact__line,
+.contact__title .hero__line{display:block;padding-bottom:.04em;}
 .contact__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(34px,6vw,90px);
   padding-top:clamp(28px,4vh,42px);border-top:1px solid var(--line);}
 
