@@ -825,6 +825,9 @@ html.footreveal .footspacer{display:block;}
   .cursor{display:none !important;}
   .grain2{display:none !important;}
   .grain{opacity:.02;animation:none !important;}
+  .rules{grid-template-columns:repeat(2,1fr);}
+  .rules span:nth-child(n+3){display:none;}
+  .rules span:nth-child(2){border-right:1px solid var(--rule-color);}
   html.footreveal main{box-shadow:none;}
   html.footreveal .foot{position:relative;}
   html.footreveal .footspacer{display:none;}
