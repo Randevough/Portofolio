@@ -765,10 +765,11 @@ import { STACK, PROOF } from '../data/portfolio';
   var ScrollTrigger = window.ScrollTrigger;
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ---------- smooth scroll ---------- */
+  /* ---------- smooth scroll (Desktop only — keep mobile scroll 100% native and 120Hz fluid) ---------- */
   var lenis: any = null;
-  if (window.Lenis) {
-    lenis = new window.Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.6 });
+  var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 820);
+  if (window.Lenis && !isTouch) {
+    lenis = new window.Lenis({ duration: 1.05, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(function (t: number) { lenis.raf(t * 1000); });
     gsap.ticker.lagSmoothing(0);
@@ -809,6 +810,7 @@ import { STACK, PROOF } from '../data/portfolio';
     }).filter(function (r): r is { btn: HTMLElement; el: HTMLElement } { return !!r.el; });
 
     var markRail = function () {
+      if (window.innerWidth <= 820) return;
       var mid = window.innerHeight * 0.42;
       var active: HTMLElement | null = null;
       railMap.forEach(function (r) {
@@ -892,15 +894,7 @@ import { STACK, PROOF } from '../data/portfolio';
   });
 
   mm.add('(max-width: 820px)', function () {
-    var frames = $$('.panel__media');
-    frames.forEach(function (f) {
-      var img = $('img', f);
-      if (!img) return;
-      gsap.fromTo(img, { yPercent: -4 }, {
-        yPercent: 4, ease: 'none',
-        scrollTrigger: { trigger: f, start: 'top bottom', end: 'bottom top', scrub: true }
-      });
-    });
+    // Keep mobile scroll completely native and unencumbered by scrub tweens
   });
 
   if (FINE) {

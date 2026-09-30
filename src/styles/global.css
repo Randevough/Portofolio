@@ -823,6 +823,8 @@ html.footreveal .footspacer{display:block;}
   .foot__cols{grid-template-columns:1fr;}
   .srail{display:none !important;}
   .cursor{display:none !important;}
+  .grain2{display:none !important;}
+  .grain{opacity:.02;animation:none !important;}
   html.footreveal main{box-shadow:none;}
   html.footreveal .foot{position:relative;}
   html.footreveal .footspacer{display:none;}
