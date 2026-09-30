@@ -484,6 +484,7 @@ import { STACK, PROOF } from '../data/portfolio';
       text: string;
       font: string;
       letterSpacing?: string;
+      align?: CanvasTextAlign;
       x: number;
       y: number;
       width: number;
@@ -497,15 +498,18 @@ import { STACK, PROOF } from '../data/portfolio';
     var updateMetrics = function () {
       if (!heroMask || !titleEl) return;
       var maskRect = heroMask.getBoundingClientRect();
+      var isCenter = window.getComputedStyle(titleEl).textAlign === 'center';
       textCache = lineSpans.map(function (span, i) {
         var box = span.parentElement || span;
         var boxRect = box.getBoundingClientRect();
         var style = window.getComputedStyle(span);
+        var x = isCenter ? (boxRect.left - maskRect.left + boxRect.width / 2) : (boxRect.left - maskRect.left);
         return {
           text: span.textContent || '',
           font: style.fontWeight + ' ' + style.fontSize + ' ' + style.fontFamily,
           letterSpacing: ('letterSpacing' in style) ? (style as any).letterSpacing : undefined,
-          x: boxRect.left - maskRect.left,
+          align: (isCenter ? 'center' : 'left') as CanvasTextAlign,
+          x: x,
           y: boxRect.top - maskRect.top,
           width: boxRect.width,
           height: boxRect.height,
@@ -583,11 +587,16 @@ import { STACK, PROOF } from '../data/portfolio';
 
         context.save();
         context.beginPath();
-        context.rect(item.x, item.y, item.width, item.height + 2);
+        if (item.align === 'center') {
+          context.rect(0, item.y, cWidth, item.height + 2);
+        } else {
+          context.rect(item.x, item.y, item.width, item.height + 2);
+        }
         context.clip();
         context.font = item.font;
         context.fillStyle = '#ffffff';
         context.textBaseline = 'top';
+        context.textAlign = item.align || 'left';
         if (item.letterSpacing && 'letterSpacing' in context) {
           (context as any).letterSpacing = item.letterSpacing;
         }
@@ -615,7 +624,8 @@ import { STACK, PROOF } from '../data/portfolio';
         } else {
           drawH = cHeight * 1.1;
           drawW = drawH * videoRatio;
-          drawX = (cWidth - drawW) * 0.38;
+          var isMobile = window.innerWidth <= 820;
+          drawX = (cWidth - drawW) * (isMobile ? 0.5 : 0.38);
           drawY = (cHeight - drawH) / 2;
         }
 
@@ -698,7 +708,7 @@ import { STACK, PROOF } from '../data/portfolio';
         curtain.classList.add('is-cover');
         requestAnimationFrame(function () { if (curtain) curtain.classList.add('is-on'); });
       }
-      setTimeout(function () { if (href) window.location.href = href; }, 380);
+      setTimeout(function () { if (href) window.location.href = href; }, 560);
     });
   }
 
