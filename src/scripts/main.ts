@@ -19,6 +19,10 @@ import { STACK, PROOF } from '../data/portfolio';
   var HAS_GSAP = !!(window.gsap && window.ScrollTrigger);
   var DESKTOP = '(min-width: 821px)';
 
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
   html.classList.add('js-ready');
 
   var MOTION = html.classList.contains('motion');
@@ -39,54 +43,88 @@ import { STACK, PROOF } from '../data/portfolio';
     var techItems = $$('.stack__item', stackHost);
     var lockedIndex: number | null = null;
 
-    var clearStack = function () {
-      techItems.forEach(function (el) { el.classList.remove('is-active'); });
-      proofItems.forEach(function (el) {
-        el.classList.remove('is-on');
-        el.classList.remove('is-dim');
-      });
-      if (stackHint) stackHint.textContent = 'All tools: ' + PROOF.length + ' projects & platforms';
-    };
-
-    var litStack = function (i: number, playSound?: boolean) {
-      if (playSound !== false) sound.playStackHover(i);
-      var t = STACK[i];
-      if (!t) return;
-      techItems.forEach(function (el, k) { el.classList.toggle('is-active', k === i); });
-      proofItems.forEach(function (el) {
-        var attr = el.getAttribute('data-proof-id');
-        var hit = attr ? t.p.indexOf(attr) > -1 : false;
-        el.classList.toggle('is-on', hit);
-        el.classList.toggle('is-dim', !hit);
-      });
-      if (stackHint) {
-        stackHint.textContent = t.n + ': used in ' + t.p.length + (t.p.length > 1 ? ' projects' : ' project');
+    var renderEvidence = function (i: number | null) {
+      if (i === null || i === undefined) {
+        proofItems.forEach(function (el) {
+          el.classList.remove('is-on');
+          el.classList.remove('is-dim');
+        });
+        if (stackHint) stackHint.textContent = 'All tools: ' + PROOF.length + ' projects & platforms';
+      } else {
+        var t = STACK[i];
+        if (!t) return;
+        proofItems.forEach(function (el) {
+          var attr = el.getAttribute('data-proof-id');
+          var hit = attr ? t.p.indexOf(attr) > -1 : false;
+          el.classList.toggle('is-on', hit);
+          el.classList.toggle('is-dim', !hit);
+        });
+        if (stackHint) {
+          stackHint.textContent = t.n + ': used in ' + t.p.length + (t.p.length > 1 ? ' projects' : ' project');
+        }
       }
     };
 
+    var updateActiveClasses = function () {
+      techItems.forEach(function (el, k) {
+        el.classList.toggle('is-active', k === lockedIndex);
+      });
+    };
+
+    var triggerClickAnim = function (el: HTMLElement) {
+      el.classList.remove('is-clicked');
+      void el.offsetWidth;
+      el.classList.add('is-clicked');
+      sound.playClick();
+      setTimeout(function () {
+        el.classList.remove('is-clicked');
+      }, 500);
+    };
+
     techItems.forEach(function (el, i) {
-      el.addEventListener('mouseenter', function () { litStack(i); });
-      el.addEventListener('focus', function () { litStack(i); });
+      el.addEventListener('mouseenter', function () {
+        sound.playStackHover(i);
+        // Preview hovered stack; locked active stack remains visibly active
+        renderEvidence(i);
+      });
+
+      el.addEventListener('mouseleave', function () {
+        // Return evidence to locked active stack (or reset if none locked)
+        renderEvidence(lockedIndex);
+      });
+
+      el.addEventListener('focus', function () {
+        sound.playStackHover(i);
+        renderEvidence(i);
+      });
+
+      el.addEventListener('blur', function () {
+        renderEvidence(lockedIndex);
+      });
+
       el.addEventListener('click', function () {
+        triggerClickAnim(el);
         if (lockedIndex === i) {
+          // Toggle off
           lockedIndex = null;
-          clearStack();
+          updateActiveClasses();
+          renderEvidence(null);
         } else {
+          // Lock active selection
           lockedIndex = i;
-          litStack(i);
+          updateActiveClasses();
+          renderEvidence(i);
         }
       });
     });
 
     stackHost.addEventListener('mouseleave', function () {
-      if (lockedIndex !== null) {
-        litStack(lockedIndex, false);
-      } else {
-        clearStack();
-      }
+      renderEvidence(lockedIndex);
+      updateActiveClasses();
     });
 
-    clearStack();
+    updateActiveClasses();
+    renderEvidence(null);
   }
 
   /* ---------------------------------------------------------------
@@ -109,8 +147,6 @@ import { STACK, PROOF } from '../data/portfolio';
     revealTargets.forEach(function (el) { el.classList.add('is-in'); });
     var t = $('[data-hero-title]');
     if (t) t.classList.add('is-in');
-    var ct = $('[data-contact-title]');
-    if (ct) ct.classList.add('is-in');
   }
 
   if (!MOTION || !('IntersectionObserver' in window)) {
@@ -129,20 +165,7 @@ import { STACK, PROOF } from '../data/portfolio';
       if (el.closest('.hero')) return;
       io.observe(el);
     });
-
-    var contactTitle = $('[data-contact-title]');
-    if (contactTitle) {
-      $$('.hero__line > span', contactTitle).forEach(function (s, i) {
-        s.style.setProperty('--d', (i * 110) + 'ms');
-      });
-      io.observe(contactTitle);
-    }
-
-    /* absolute last resort: nothing may stay invisible past 4.5s */
-    setTimeout(showAll, 4500);
   }
-
-  window.addEventListener('error', function () { setTimeout(showAll, 50); });
 
   /* ---------------------------------------------------------------
      HERO INTRO + LOADER (CSS transitions, no engine required)
