@@ -13,6 +13,7 @@ interface Props {
   isCaseStudy?: boolean;
   showRail?: boolean;
   preloadImage?: string;
+  preloadVideo?: string;
   ogImage?: string;
 }
 
@@ -23,6 +24,7 @@ const {
   isCaseStudy = false,
   showRail = false,
   preloadImage,
+  preloadVideo,
   ogImage,
 } = Astro.props;
 
@@ -92,6 +94,8 @@ const schemaData = {
 <meta name="keywords" content="Muhamad Rafi Fernanda, Rafi Fernanda, Randevough, Full-stack Developer, Software Engineer, Web Developer Jakarta, TypeScript, Next.js, PostgreSQL">
 <meta name="theme-color" content="#121211">
 <meta name="google-site-verification" content="ws6bbgVD92MH1Oy8r5Tt9U_n7PkneGLB2aq3X3GW6As">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' data: blob:; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com;">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={isCaseStudy ? 'article' : 'profile'}>
@@ -116,7 +120,9 @@ const schemaData = {
 <script type="application/ld+json" is:inline set:html={JSON.stringify(schemaData)} />
 
 {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high">}
+{preloadVideo && <link rel="preload" as="video" href={preloadVideo} type="video/webm">}
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.setAttribute('media', 'all')">
 <noscript>
@@ -148,9 +154,6 @@ if(c.length)d.className=(d.className+' '+c.join(' ')).trim();})();
 
 <Footer lean={isCaseStudy} />
 
-<script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <script src="../scripts/main.ts"></script>
 </body>
 </html>

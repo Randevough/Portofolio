@@ -22,6 +22,7 @@ const andalasiaRoute = `${base}work/andalasia/`;
   showLoader={true}
   showRail={true}
   preloadImage={heroPoster}
+  preloadVideo={heroWebm}
 >
   <main id="top">
 
@@ -119,7 +120,7 @@ const andalasiaRoute = `${base}work/andalasia/`;
     <div class="work__head">
       <div class="section__head">
         <h2 class="section__title" data-split><span class="word"><span style="--d:0ms">Selected</span></span> <span class="word"><span style="--d:45ms">work</span></span></h2>
-        <a class="section__note mono work__github" href="https://github.com/randevough" target="_blank" rel="noopener" data-fade data-magnetic>
+        <a class="section__note mono work__github" href="https://github.com/randevough" target="_blank" rel="noopener noreferrer" data-fade data-magnetic>
           <span>Explore all on GitHub</span> <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span>
         </a>
       </div>
@@ -131,7 +132,7 @@ const andalasiaRoute = `${base}work/andalasia/`;
         <!-- Panel 1: CodeQuest -->
         <article class="panel">
           <a class="panel__media" href={codequestRoute} data-pt data-hover="View case">
-            <img src={`${base}assets/work-codequest.webp`} alt="CodeQuest interface" width="1440" height="900" loading="lazy" decoding="async">
+            <img src={`${base}assets/work-codequest.webp`} alt="CodeQuest interface" width="1440" height="900" loading="eager" fetchpriority="high" decoding="async">
           </a>
           <div class="panel__body">
             <span class="panel__index mono">Developer challenge platform</span>
@@ -144,7 +145,7 @@ const andalasiaRoute = `${base}work/andalasia/`;
             </ul>
             <div class="panel__links">
               <a class="btn btn--solid btn--sm" href={codequestRoute} data-pt data-magnetic><span>Read case study</span> <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
-              <a class="link link--dim" href="https://github.com/Randevough/CodeQuest" target="_blank" rel="noopener" data-magnetic>Source code <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+              <a class="link link--dim" href="https://github.com/Randevough/CodeQuest" target="_blank" rel="noopener noreferrer" data-magnetic>Source code <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
             </div>
           </div>
         </article>
@@ -165,7 +166,7 @@ const andalasiaRoute = `${base}work/andalasia/`;
             </ul>
             <div class="panel__links">
               <a class="btn btn--solid btn--sm" href={aksaranetraRoute} data-pt data-magnetic><span>Read case study</span> <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
-              <a class="link link--dim" href="https://aksaranetra.vercel.app/" target="_blank" rel="noopener" data-magnetic>Live demo <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+              <a class="link link--dim" href="https://aksaranetra.vercel.app/" target="_blank" rel="noopener noreferrer" data-magnetic>Live demo <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
             </div>
           </div>
         </article>
@@ -186,7 +187,7 @@ const andalasiaRoute = `${base}work/andalasia/`;
             </ul>
             <div class="panel__links">
               <a class="btn btn--solid btn--sm" href={ukmcodingRoute} data-pt data-magnetic><span>Read case study</span> <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
-              <a class="link link--dim" href="https://ukmcoding.site/" target="_blank" rel="noopener" data-magnetic>Live demo <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+              <a class="link link--dim" href="https://ukmcoding.site/" target="_blank" rel="noopener noreferrer" data-magnetic>Live demo <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
             </div>
           </div>
         </article>
@@ -207,7 +208,7 @@ const andalasiaRoute = `${base}work/andalasia/`;
             </ul>
             <div class="panel__links">
               <a class="btn btn--solid btn--sm" href={andalasiaRoute} data-pt data-magnetic><span>Read case study</span> <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
-              <a class="link link--dim" href="https://andalasiagroup.com/" target="_blank" rel="noopener" data-magnetic>Live demo <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+              <a class="link link--dim" href="https://andalasiagroup.com/" target="_blank" rel="noopener noreferrer" data-magnetic>Live demo <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
             </div>
           </div>
         </article>
@@ -443,7 +444,7 @@ const andalasiaRoute = `${base}work/andalasia/`;
           {PROOF.map((p) => (
             <li data-proof-id={p.id}>
               {p.url ? (
-                <a href={p.url} target="_blank" rel="noopener" class="proof__link">
+                <a href={p.url} target="_blank" rel="noopener noreferrer" class="proof__link">
                   <b>{p.name}</b>
                   <span class="proof__arw" aria-hidden="true">
                     <svg viewBox="0 0 10 10" width="10" height="10" fill="none">
@@ -500,10 +501,10 @@ const andalasiaRoute = `${base}work/andalasia/`;
         </div>
         <p class="contact__note" data-fade>Tell me about your project scope and timeline. I usually respond within a few hours</p>
         <div class="contact__socials">
-          <a href="https://github.com/randevough" target="_blank" rel="noopener">GitHub <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
-          <a href="https://www.linkedin.com/in/muhamad-rafi-fernanda-5248a0301/" target="_blank" rel="noopener">LinkedIn <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
-          <a href="https://wa.me/62XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
-          <a href="https://instagram.com/randevough" target="_blank" rel="noopener">Instagram <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+          <a href="https://github.com/randevough" target="_blank" rel="noopener noreferrer">GitHub <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+          <a href="https://www.linkedin.com/in/muhamad-rafi-fernanda-5248a0301/" target="_blank" rel="noopener noreferrer">LinkedIn <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+          <a href="https://wa.me/62XXXXXXXXXX" target="_blank" rel="noopener noreferrer">WhatsApp <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
+          <a href="https://instagram.com/randevough" target="_blank" rel="noopener noreferrer">Instagram <span><img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" /></span></a>
         </div>
       </div>
 

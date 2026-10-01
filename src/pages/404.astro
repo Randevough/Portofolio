@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="404 — Page Not Found | Muhamad Rafi Fernanda"
+  description="This page does not exist or was moved. Return to the portfolio homepage."
+  isCaseStudy={true}
+>
+  <main id="top" class="err-page">
+    <div class="err-page__wrap">
+      <div class="err-page__head">
+        <span class="err-page__tag mono">404 | Route not found</span>
+        <h1 class="err-page__title">This page doesn't exist</h1>
+        <p class="err-page__desc">
+          The URL might be mistyped, moved, or deleted during a deploy. Head back to the homepage or jump straight into the projects.
+        </p>
+      </div>
+
+      <div class="err-page__actions">
+        <a class="btn btn--solid" href={base} data-pt data-magnetic>
+          <span>Back to homepage</span>
+        </a>
+        <a class="btn" href={`${base}#work`} data-magnetic>
+          <span>Selected work</span>
+          <img class="arw" src={`${base}arrow.svg`} alt="" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .err-page {
+    min-height: calc(100svh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(120px, 18vh, 180px) var(--pad) clamp(60px, 8vh, 90px);
+    position: relative;
+    z-index: 1;
+  }
+
+  .err-page__wrap {
+    max-width: 680px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 4vh, 40px);
+  }
+
+  .err-page__head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .err-page__tag {
+    color: var(--accent);
+    margin-bottom: clamp(14px, 2.2vh, 22px);
+    display: inline-block;
+  }
+
+  .err-page__title {
+    font-size: clamp(2.4rem, 6.5vw, 4.8rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.04;
+    color: var(--text);
+    margin: 0 0 clamp(16px, 2.6vh, 24px);
+  }
+
+  .err-page__desc {
+    font-size: clamp(1rem, 1.35vw, 1.15rem);
+    color: var(--muted);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+
+  .err-page__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+  }
+</style>
