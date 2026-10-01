@@ -112,7 +112,7 @@ html.motion.js-ready [data-fade]{animation:none;}
 
 /* ---------- 04 LOADER + CURSOR ---------- */
 .loader{position:fixed;inset:0;z-index:120;background:var(--bg);display:grid;place-items:center;
-  transition:transform .75s cubic-bezier(.76,0,.24,1);
+  transition:transform .85s cubic-bezier(.76,0,.24,1);
   animation:loaderFailsafe 1ms linear 5s forwards;}
 html.js-ready .loader{animation:none;}
 @keyframes loaderFailsafe{to{transform:translateY(-100%);visibility:hidden;}}
@@ -123,12 +123,12 @@ html.js-ready .loader{animation:none;}
 .loader__name{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:600;letter-spacing:-.04em;}
 html.motion .loader__name{opacity:0;letter-spacing:.42em;filter:blur(7px);
   transform:translateY(7px);
-  transition:letter-spacing 1.0s var(--ease),opacity .7s var(--ease),
-             filter .85s var(--ease),transform .85s var(--ease);}
+  transition:letter-spacing 1.05s var(--ease),opacity .75s var(--ease),
+             filter .9s var(--ease),transform .9s var(--ease);}
 html.motion .loader.is-ready .loader__name{opacity:1;letter-spacing:-.04em;
   filter:blur(0);transform:none;}
 html.motion .loader.is-out .loader__name{opacity:0;transform:translateY(-16px);
-  transition:opacity .4s var(--ease),transform .55s var(--ease);}
+  transition:opacity .5s var(--ease),transform .65s var(--ease);}
 
 /* giant outlined duplicate drifting the other way — depth, one layer back */
 .loader__ghost{position:absolute;left:50%;top:50%;white-space:nowrap;pointer-events:none;

@@ -220,12 +220,12 @@ gsap.registerPlugin(ScrollTrigger);
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         if (loader) loader.classList.add('is-ready');
-        runCounter(450);
+        runCounter(1150);
       });
     });
     /* the loader leaving and the hero arriving are one movement */
-    setTimeout(function () { if (loader) loader.classList.add('is-out'); startHero(); }, 500);
-    setTimeout(function () { if (loader) loader.classList.add('is-done'); }, 950);
+    setTimeout(function () { if (loader) loader.classList.add('is-out'); startHero(); }, 1450);
+    setTimeout(function () { if (loader) loader.classList.add('is-done'); }, 2350);
   } else {
     try {
       sessionStorage.setItem('rv-visited', '1');
