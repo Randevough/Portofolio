@@ -1,4 +1,4 @@
-# Rafi Fernanda / Portfolio
+# Muhamad Rafi Fernanda / Portfolio
 
 The personal website and engineering portfolio of Muhamad Rafi Fernanda ([@randevough](https://github.com/randevough)), a full-stack developer based in Jakarta.
 
