@@ -75,7 +75,51 @@ const schemaData = {
         'Node.js',
         'API Architecture'
       ]
-    }
+    },
+    ...(isCaseStudy
+      ? [
+          {
+            '@type': 'TechArticle',
+            '@id': `${canonicalURL.toString()}#article`,
+            'url': canonicalURL.toString(),
+            'headline': title,
+            'description': description,
+            'image': socialImageURL.toString(),
+            'author': {
+              '@id': `${siteUrl}/#person`
+            },
+            'publisher': {
+              '@id': `${siteUrl}/#person`
+            },
+            'mainEntityOfPage': canonicalURL.toString(),
+            'inLanguage': 'en-US'
+          },
+          {
+            '@type': 'BreadcrumbList',
+            '@id': `${canonicalURL.toString()}#breadcrumb`,
+            'itemListElement': [
+              {
+                '@type': 'ListItem',
+                'position': 1,
+                'name': 'Home',
+                'item': `${siteUrl}/`
+              },
+              {
+                '@type': 'ListItem',
+                'position': 2,
+                'name': 'Work',
+                'item': `${siteUrl}/#work`
+              },
+              {
+                '@type': 'ListItem',
+                'position': 3,
+                'name': title.split('—')[0].trim(),
+                'item': canonicalURL.toString()
+              }
+            ]
+          }
+        ]
+      : [])
   ]
 };
 ---
@@ -95,7 +139,8 @@ const schemaData = {
 <meta name="theme-color" content="#121211">
 <meta name="google-site-verification" content="ws6bbgVD92MH1Oy8r5Tt9U_n7PkneGLB2aq3X3GW6As">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' data: blob:; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com;">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: blob:; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests;">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={isCaseStudy ? 'article' : 'profile'}>
@@ -113,21 +158,20 @@ const schemaData = {
 <meta name="twitter:description" content={description}>
 <meta name="twitter:image" content={socialImageURL}>
 
-<!-- Favicon -->
+<!-- Favicon & Touch Icons -->
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Rafi Fernanda">
+<link rel="manifest" href="/site.webmanifest">
 
 <!-- Structured Data -->
 <script type="application/ld+json" is:inline set:html={JSON.stringify(schemaData)} />
 
 {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high">}
 {preloadVideo && <link rel="preload" as="video" href={preloadVideo} type="video/webm">}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.setAttribute('media', 'all')">
-<noscript>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-</noscript>
+<link rel="preload" href="/fonts/inter-tight-7-NGSwv5HMAFg6IuGlBNMjxLsH8ag.woff2" as="font" type="font/woff2" crossorigin>
 <script is:inline>
 (function(){var d=document.documentElement,c=[];
 try{
