@@ -1,10 +1,6 @@
 ---
 import BaseLayout from '../layouts/Base.astro';
-import { getCollection } from 'astro:content';
 import { PROOF, STACK, ROLES } from '../data/portfolio';
-
-const workItems = await getCollection('work');
-workItems.sort((a, b) => a.data.order - b.data.order);
 
 const base = import.meta.env.BASE_URL;
 const heroPoster = `${base}assets/hero-poster.jpg`;

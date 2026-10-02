@@ -1,11 +1,6 @@
-/**
- * Dark Industrial Micro-Interaction Sound Engine
- * Synthesizes deep, tactile analog feedback via native Web Audio API.
- * Features dark sub-mid feedback delay for tech stacks, mechanical burger latches,
- * and weighted card transit thuds. Zero external audio assets, zero latency.
- */
+// Web Audio micro-interaction sound engine
 
-// Low-register industrial frequencies (D2 to C3) for a moody, serious studio aesthetic
+// Pentatonic frequencies (D2 to E3)
 const DARK_STACK_FREQUENCIES = [
   73.42,  // D2
   87.31,  // F2
@@ -52,7 +47,6 @@ class DarkAudioEngine {
       if (AudioCtx) {
         this.ctx = new AudioCtx();
 
-        // Dark feedback delay network (filtered to low-mid room echo)
         this.delayNode = this.ctx.createDelay();
         this.delayNode.delayTime.setValueAtTime(0.13, this.ctx.currentTime);
 
@@ -63,7 +57,6 @@ class DarkAudioEngine {
         this.delayFilter.type = 'lowpass';
         this.delayFilter.frequency.setValueAtTime(320, this.ctx.currentTime);
 
-        // Connect delay feedback loop: Delay -> Filter -> Feedback -> Delay
         this.delayNode.connect(this.delayFilter);
         this.delayFilter.connect(this.delayFeedback);
         this.delayFeedback.connect(this.delayNode);
@@ -75,9 +68,7 @@ class DarkAudioEngine {
     }
   }
 
-  /**
-   * Tactile analog microswitch click for buttons and links
-   */
+  // Button click
   public playClick() {
     this.initContext();
     if (!this.ctx || this.ctx.state !== 'running') return;
@@ -102,9 +93,7 @@ class DarkAudioEngine {
     } catch {}
   }
 
-  /**
-   * Subtle low magnetic snap when cursor catches magnetic buttons
-   */
+  // Magnetic button hover snap
   public playMagnetic() {
     this.initContext();
     if (!this.ctx || this.ctx.state !== 'running') return;
@@ -133,9 +122,7 @@ class DarkAudioEngine {
     } catch {}
   }
 
-  /**
-   * Crisp, low-frequency industrial encoder note for Tech Stack hovers (single clean tone, no echo duplicate)
-   */
+  // Stack hover tone
   public playStackHover(index: number = 0) {
     this.initContext();
     if (!this.ctx || this.ctx.state !== 'running') return;
@@ -171,9 +158,7 @@ class DarkAudioEngine {
     } catch {}
   }
 
-  /**
-   * Dual mechanical latch for mobile hamburger menu
-   */
+  // Menu open/close latch
   public playBurger(isOpen: boolean) {
     this.initContext();
     if (!this.ctx || this.ctx.state !== 'running') return;
@@ -201,9 +186,7 @@ class DarkAudioEngine {
     } catch {}
   }
 
-  /**
-   * Velvet paper / folio brush whisper when hovering How I Work items and timeline rows
-   */
+  // Row hover sound
   public playRow() {
     this.initContext();
     if (!this.ctx || this.ctx.state !== 'running') return;
@@ -220,7 +203,6 @@ class DarkAudioEngine {
       const noiseSource = this.ctx.createBufferSource();
       noiseSource.buffer = buffer;
 
-      // Bandpass filter shaping to mimic fibrous matte card paper sliding across surface
       const filter = this.ctx.createBiquadFilter();
       filter.type = 'bandpass';
       filter.frequency.setValueAtTime(820, now);
@@ -228,7 +210,6 @@ class DarkAudioEngine {
       filter.Q.setValueAtTime(1.1, now);
 
       const gain = this.ctx.createGain();
-      // Whisper-level envelope: soft attack (6ms) + smooth decay (45ms)
       gain.gain.setValueAtTime(0.001, now);
       gain.gain.linearRampToValueAtTime(0.036, now + 0.008);
       gain.gain.exponentialRampToValueAtTime(0.0005, now + 0.052);
@@ -242,9 +223,7 @@ class DarkAudioEngine {
     } catch {}
   }
 
-  /**
-   * Deep, low-frequency weighted transit thud for Next Project case study card
-   */
+  // Next project card hover
   public playNextProject() {
     this.initContext();
     if (!this.ctx || this.ctx.state !== 'running') return;
@@ -273,9 +252,7 @@ class DarkAudioEngine {
     } catch {}
   }
 
-  /**
-   * Deep analog weighted shutter/slide transit when changing pages
-   */
+  // Page transition sound
   public playTransition() {
     this.initContext();
     if (!this.ctx || this.ctx.state !== 'running') return;
@@ -287,7 +264,6 @@ class DarkAudioEngine {
     try {
       const now = this.ctx.currentTime;
 
-      // Sub-bass resonant transit (68Hz down to 32Hz)
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
       const filter = this.ctx.createBiquadFilter();
@@ -310,7 +286,6 @@ class DarkAudioEngine {
       osc.start(now);
       osc.stop(now + 0.17);
 
-      // Soft high-frequency shutter transient (analog mechanical release)
       const snap = this.ctx.createOscillator();
       const snapGain = this.ctx.createGain();
       snap.type = 'triangle';
@@ -337,7 +312,6 @@ class DarkAudioEngine {
     window.addEventListener('pointerdown', unlock, { once: true });
     window.addEventListener('keydown', unlock, { once: true });
 
-    // Standard tactile clicks on interactive elements (excluding page transitions)
     document.addEventListener('click', (e) => {
       const target = (e.target as Element)?.closest('a, button, .panel');
       if (
@@ -350,7 +324,6 @@ class DarkAudioEngine {
       }
     });
 
-    // Mobile burger menu latch
     document.addEventListener('click', (e) => {
       const burger = (e.target as Element)?.closest('[data-burger]');
       if (burger) {
@@ -359,7 +332,6 @@ class DarkAudioEngine {
       }
     });
 
-    // Next Project card in case studies (single trigger per card)
     let lastNextCard: Element | null = null;
     document.addEventListener('mouseover', (e) => {
       const nextCard = (e.target as Element)?.closest('.cs__next a');
@@ -373,7 +345,6 @@ class DarkAudioEngine {
       }
     }, { passive: true });
 
-    // Experience timeline row hovers and How I Work items (single trigger per card)
     let lastRowCard: Element | null = null;
     document.addEventListener('mouseover', (e) => {
       const row = (e.target as Element)?.closest('.row, .how__item');
@@ -387,7 +358,6 @@ class DarkAudioEngine {
       }
     }, { passive: true });
 
-    // Magnetic button snap (single trigger per element, ignore inner children)
     let lastMagneticTarget: Element | null = null;
     if (document.documentElement.classList.contains('fine')) {
       document.addEventListener('pointerover', (e) => {

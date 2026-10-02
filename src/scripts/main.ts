@@ -6,15 +6,12 @@ import { STACK, PROOF } from '../data/portfolio';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* =================================================================
-   RANDEVOUGH — STUDIO GROTESK
-   ================================================================= */
+// Studio Grotesk main script
 (function () {
   'use strict';
   sound.bindAutoListeners();
 
   var html = document.documentElement;
-  var HAS_GSAP = true;
   var DESKTOP = '(min-width: 821px)';
 
   if ('scrollRestoration' in history) {
@@ -29,9 +26,7 @@ gsap.registerPlugin(ScrollTrigger);
   var $$ = function <T extends HTMLElement = HTMLElement>(s: string, c?: Element | Document): T[] { return Array.prototype.slice.call((c || document).querySelectorAll<T>(s)); };
   var esc = function (s: string): string { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
 
-  /* ---------------------------------------------------------------
-     INTERACTION: stack evidence map (DOM rendered statically in Astro)
-     --------------------------------------------------------------- */
+  // Stack evidence interaction
   var stackHost = $('[data-stack]');
   var proofHost = $('[data-proof]');
   var stackHint = $('[data-stack-hint]');
@@ -125,9 +120,7 @@ gsap.registerPlugin(ScrollTrigger);
     renderEvidence(null);
   }
 
-  /* ---------------------------------------------------------------
-     SPLIT WORDS (staggered via CSS custom property)
-     --------------------------------------------------------------- */
+  // Split words for text animation
   $$('[data-split]').forEach(function (el) {
     if (el.querySelector('.word')) return;
     var words = (el.textContent || '').trim().split(/\s+/);
@@ -136,9 +129,7 @@ gsap.registerPlugin(ScrollTrigger);
     }).join(' ');
   });
 
-  /* ---------------------------------------------------------------
-     REVEALS — IntersectionObserver, immune to scroll math
-     --------------------------------------------------------------- */
+  // Scroll reveals
   var revealTargets = $$('[data-split], [data-fade], .section__head');
 
   function showAll() {
@@ -165,9 +156,7 @@ gsap.registerPlugin(ScrollTrigger);
     });
   }
 
-  /* ---------------------------------------------------------------
-     HERO INTRO + LOADER (CSS transitions, no engine required)
-     --------------------------------------------------------------- */
+  // Hero intro and loader
   var loader = $('[data-loader]');
   var heroTitle = $('[data-hero-title]');
 
@@ -194,7 +183,6 @@ gsap.registerPlugin(ScrollTrigger);
     var t0 = performance.now();
     var step = function (now: number) {
       var p = Math.min(1, (now - t0) / ms);
-      /* ease-out so the number decelerates into 100 */
       var v = Math.round((1 - Math.pow(1 - p, 3)) * 100);
       if (loaderCount) loaderCount.textContent = v < 100 ? ('0' + v).slice(-2) : '100';
       if (p < 1) requestAnimationFrame(step);
@@ -223,7 +211,6 @@ gsap.registerPlugin(ScrollTrigger);
         runCounter(1150);
       });
     });
-    /* the loader leaving and the hero arriving are one movement */
     setTimeout(function () { if (loader) loader.classList.add('is-out'); startHero(); }, 1450);
     setTimeout(function () { if (loader) loader.classList.add('is-done'); }, 2350);
   } else {
@@ -233,9 +220,7 @@ gsap.registerPlugin(ScrollTrigger);
     startHero();
   }
 
-  /* ---------------------------------------------------------------
-     POINTER SPOTLIGHT — plain CSS variables, no engine needed
-     --------------------------------------------------------------- */
+  // Pointer spotlight
   var spot = $('[data-spot]');
   if (spot && FINE && MOTION) {
     var tx = window.innerWidth / 2, ty = window.innerHeight / 2;
@@ -280,9 +265,7 @@ gsap.registerPlugin(ScrollTrigger);
     setInterval(tick, 1000);
   }
 
-  /* ---------------------------------------------------------------
-     NAV + MOBILE MENU
-     --------------------------------------------------------------- */
+  // Nav & mobile menu
   var nav = $('[data-nav]');
   var burger = $('[data-burger]');
   var navmenu = $('[data-navmenu]');
@@ -314,9 +297,7 @@ gsap.registerPlugin(ScrollTrigger);
   if (navmenu) $$('a', navmenu).forEach(function (a) { a.addEventListener('click', closeMenu); });
   window.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
 
-  /* ---------------------------------------------------------------
-     CONTACT FORM
-     --------------------------------------------------------------- */
+  // Contact form
   var form = $('[data-cform]') as HTMLFormElement | null;
   if (form) {
     var status = $('[data-cform-status]', form);
@@ -516,31 +497,15 @@ gsap.registerPlugin(ScrollTrigger);
         };
 
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(email).then(handleSuccess).catch(function () {
-            var taEl = document.createElement('textarea');
-            taEl.value = email;
-            document.body.appendChild(taEl);
-            taEl.select();
-            document.execCommand('copy');
-            document.body.removeChild(taEl);
-            handleSuccess();
-          });
+          navigator.clipboard.writeText(email).then(handleSuccess).catch(handleSuccess);
         } else {
-          var taEl = document.createElement('textarea');
-          taEl.value = email;
-          document.body.appendChild(taEl);
-          taEl.select();
-          document.execCommand('copy');
-          document.body.removeChild(taEl);
           handleSuccess();
         }
       });
     }
   }
 
-  /* ---------------------------------------------------------------
-     HERO VIDEO TEXT CLIPPING ENGINE (True Canvas 2D source-in masking)
-     --------------------------------------------------------------- */
+  // Hero video canvas text mask
   var heroMask = $('[data-hero-mask]') as HTMLElement | null;
   var heroVideo = $('[data-hero-video]') as HTMLVideoElement | null;
   var heroCanvas = $('[data-hero-canvas]') as HTMLCanvasElement | null;
@@ -676,9 +641,7 @@ gsap.registerPlugin(ScrollTrigger);
         context.restore();
       }
 
-      // 2. Composite Video into Text only (source-in)
-      // Destination Alpha > 0 ONLY inside text glyphs.
-      // Outside glyphs, Alpha is 0 (100% transparent: ZERO leak, ZERO haze, ZERO box).
+      // Composite video into text glyphs
       if (heroVideo.readyState >= 2) {
         context.globalCompositeOperation = 'source-in';
 
@@ -812,13 +775,10 @@ gsap.registerPlugin(ScrollTrigger);
     tintZones.forEach(function (z) { tintObs.observe(z.el); });
   }
 
-  /* =================================================================
-     DECORATIVE LAYER — GSAP only past this point.
-     Everything above has already guaranteed the page is readable.
-     ================================================================= */
+  // Motion enhancements (GSAP)
   if (!MOTION) return;
 
-  /* ---------- smooth scroll (Desktop only — keep mobile scroll 100% native and 120Hz fluid) ---------- */
+  // Smooth scroll (desktop)
   var lenis: any = null;
   var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 820);
   if (!isTouch) {
@@ -845,7 +805,7 @@ gsap.registerPlugin(ScrollTrigger);
     });
   });
 
-  /* ---------- section rail ---------- */
+  // Section rail
   var railBtns = $$('[data-srail-to]');
   if (railBtns.length) {
     railBtns.forEach(function (b) {
@@ -877,8 +837,7 @@ gsap.registerPlugin(ScrollTrigger);
     window.addEventListener('resize', markRail);
   }
 
-
-  /* ---------- responsive choreography ---------- */
+  // Responsive animations
   var mm = gsap.matchMedia();
 
   mm.add(DESKTOP, function () {
@@ -888,14 +847,13 @@ gsap.registerPlugin(ScrollTrigger);
     var count = $('[data-work-count]');
     var panels = $$('.panel', track || document);
     var workSection = pin ? (pin.closest('.work') || pin) : null;
-    var hTween: any = null;
 
     if (pin && track && panels.length) {
       var run = function () { return Math.max(1, (track as HTMLElement).scrollWidth - window.innerWidth); };
 
       gsap.set(bar, { scaleX: 0, transformOrigin: 'left center' });
 
-      hTween = gsap.to(track, {
+      gsap.to(track, {
         x: function () { return -run(); },
         ease: 'none',
         scrollTrigger: {
@@ -944,10 +902,6 @@ gsap.registerPlugin(ScrollTrigger);
       if (track) gsap.set(track, { clearProps: 'transform' });
       if (skewEls.length) gsap.set(skewEls, { clearProps: 'transform' });
     };
-  });
-
-  mm.add('(max-width: 820px)', function () {
-    // Keep mobile scroll completely native and unencumbered by scrub tweens
   });
 
   if (FINE) {

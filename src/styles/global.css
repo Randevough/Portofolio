@@ -1,13 +1,5 @@
 /* =================================================================
    RANDEVOUGH — STUDIO GROTESK
-   01 tokens   02 reset    03 texture   04 loader/cursor  05 nav
-   06 hero     07 marquee  08 statement 09 index          10 work
-   11 services 12 about    13 experience 14 stack         15 contact
-   16 footer   17 case study  18 responsive  19 reduced motion
-
-   REVEALS ARE CSS-DRIVEN. A class ".is-in" is added by
-   IntersectionObserver — never by scroll-position math. Nothing here
-   depends on pinning, smooth scroll, or GSAP being alive.
    ================================================================= */
 
 /* ---------- 01 TOKENS ---------- */
@@ -428,8 +420,6 @@ html.motion .hero.is-pushed .hero__inner{transform:none;}
 
 /* ---------- 10 WORK ---------- */
 .work{position:relative;z-index:1;padding-bottom:clamp(30px,5vh,64px);}
-/* heading and gallery live in ONE viewport-tall box, so nothing repositions
-   at the moment the pin engages */
 @media (min-width:821px){
   .work{height:100svh;display:flex;flex-direction:column;padding-bottom:0;}
 }
@@ -439,8 +429,6 @@ html.motion .hero.is-pushed .hero__inner{transform:none;}
 .work__github{display:inline-flex;align-items:center;gap:8px;color:var(--muted);
   font-size:.84rem;letter-spacing:.04em;transition:color 280ms var(--ease);}
 .work__github:hover{color:var(--accent);}
-/* pin container is EXACTLY one viewport tall and centres its track —
-   this is what keeps the horizontal gallery optically centred */
 .work__pin{position:relative;flex:1 1 auto;min-height:0;height:100svh;
   display:flex;align-items:center;overflow:hidden;}
 @media (min-width:821px){.work__pin{height:auto;}}
@@ -511,7 +499,7 @@ html.motion .hero.is-pushed .hero__inner{transform:none;}
 .process li span{color:var(--accent);display:block;margin-bottom:16px;}
 .process li strong{display:block;font-weight:500;font-size:1.02rem;margin-bottom:7px;color:var(--text);}
 
-/* Option 3 texture: faint diagonal micro-hatch — replaces dense dots */
+/* Diagonal micro-hatch texture */
 .svc__card,.process li{position:relative;isolation:isolate;}
 .svc__card::after,.process li::after{content:"";position:absolute;inset:0;z-index:-1;
   pointer-events:none;opacity:.024;
@@ -563,9 +551,11 @@ html.motion .hero.is-pushed .hero__inner{transform:none;}
   transition:color 250ms var(--ease);}
 .stack__item::after{content:"·";color:var(--line-2);position:absolute;right:.08em;}
 .stack__item:last-child::after{display:none;}
-.stack__item:hover{color:var(--text);}
 .stack__item.is-key{color:var(--muted);}
-.stack__item.is-active{color:var(--accent);}
+.stack__item:hover,
+.stack__item.is-key:hover{color:var(--text);}
+.stack__item.is-active,
+.stack__item.is-active:hover{color:var(--accent);}
 
 @keyframes stackClickPop{
   0%{transform:scale(1);}
@@ -725,8 +715,6 @@ html.footreveal .footspacer{display:block;}
 .foot--lean .foot__inner a:hover{color:var(--accent);}
 
 /* ---------- 17 CASE STUDY ---------- */
-/* every case-study block is constrained here, including the ones that
-   live outside the .cs wrapper */
 .cs,.cs__body,.cs__next{max-width:1180px;margin-left:auto;margin-right:auto;
   padding-left:var(--pad);padding-right:var(--pad);position:relative;z-index:1;}
 .cs{padding-top:130px;}
@@ -832,8 +820,11 @@ html.footreveal .footspacer{display:block;}
   .hero__actions .btn{width:100%;justify-content:center;padding:12px 24px;font-size:.9rem;}
   .hero__meta{width:100%;display:flex;justify-content:space-between;align-items:center;}
   .hero__meta span:nth-child(2){display:none;}
-  .section__head{grid-template-columns:auto 1fr;row-gap:10px;}
+  .section{padding-top:clamp(36px,5vh,60px);padding-bottom:clamp(36px,5vh,60px);}
+  .section__head{grid-template-columns:auto 1fr;row-gap:10px;padding-bottom:clamp(14px,2.2vh,20px);margin-bottom:clamp(18px,2.8vh,26px);}
   .section__note{grid-column:1 / -1;text-align:left;padding-bottom:0;}
+  .services{padding-top:clamp(36px,5vh,60px);padding-bottom:clamp(36px,5vh,60px);}
+  .about{padding-top:clamp(36px,5vh,60px);padding-bottom:clamp(28px,4vh,44px);}
   .statement{padding-top:clamp(38px,6.5vh,56px);padding-bottom:clamp(44px,7.5vh,70px);}
   .how__item{grid-template-columns:1fr;gap:14px;padding-left:0;padding-right:0;}
   .how__num{font-size:2rem;}
