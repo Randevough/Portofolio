@@ -198,6 +198,10 @@ gsap.registerPlugin(ScrollTrigger);
   var isAudit = typeof navigator !== 'undefined' && /Chrome-Lighthouse|Googlebot|HeadlessChrome/i.test(navigator.userAgent);
   if (isAudit) skipLoader = true;
 
+  if (skipLoader) {
+    html.classList.add('skip-loader');
+  }
+
   if (!MOTION || skipLoader) {
     if (loader) loader.classList.add('is-ready', 'is-out', 'is-done');
     startHero();
@@ -516,6 +520,7 @@ gsap.registerPlugin(ScrollTrigger);
     var lineSpans = Array.from(heroTitleEl.querySelectorAll('.hero__line > span')) as HTMLElement[];
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var isCanvasReady = false;
+    var isAnimDone = false;
 
     interface TextSpanCache {
       text: string;
@@ -555,6 +560,28 @@ gsap.registerPlugin(ScrollTrigger);
       });
     };
 
+    var posterImg: HTMLImageElement | null = null;
+    var posterUrl = heroVideo.getAttribute('poster') || heroVideo.poster;
+    if (posterUrl) {
+      posterImg = new Image();
+      posterImg.src = posterUrl;
+    }
+
+    // Exact cubic-bezier(.22, 1, .36, 1) solver matching CSS var(--ease)
+    var easeOutStudio = function (p: number): number {
+      if (p <= 0) return 0;
+      if (p >= 1) return 1;
+      var t = p;
+      for (var k = 0; k < 5; k++) {
+        var xt = 3 * 0.22 * (1 - t) * (1 - t) * t + 3 * 0.36 * (1 - t) * t * t + t * t * t;
+        var dxt = 3 * 0.22 * (1 - t) * (1 - 3 * t) + 3 * 0.36 * t * (2 - 3 * t) + 3 * t * t;
+        if (Math.abs(dxt) < 1e-5) break;
+        t -= (xt - p) / dxt;
+        t = Math.max(0, Math.min(1, t));
+      }
+      return 1 - Math.pow(1 - t, 3);
+    };
+
     var heroStartTime = (!MOTION || skipLoader) ? 1 : 0;
     var startCanvasMotion = function () {
       if (heroStartTime === 0) {
@@ -562,7 +589,7 @@ gsap.registerPlugin(ScrollTrigger);
       }
     };
 
-    if (titleEl.classList.contains('is-in')) {
+    if (titleEl.classList.contains('is-in') || skipLoader) {
       startCanvasMotion();
     } else {
       var heroObs = new MutationObserver(function () {
@@ -604,7 +631,7 @@ gsap.registerPlugin(ScrollTrigger);
 
       // 1. Draw Text as Destination Mask with staggered line slide
       var now = performance.now();
-      var isAnimDone = (heroStartTime === 1) || (heroStartTime > 0 && now - heroStartTime > 1350);
+      isAnimDone = (heroStartTime === 1) || (heroStartTime > 0 && now - heroStartTime > 1350);
 
       for (var i = 0; i < textCache.length; i++) {
         var item = textCache[i];
@@ -616,7 +643,7 @@ gsap.registerPlugin(ScrollTrigger);
             continue;
           }
           var p = Math.min(1, elapsed / 1050);
-          var eased = 1 - Math.pow(1 - p, 4);
+          var eased = easeOutStudio(p);
           currentY = item.y + (1 - eased) * (item.height * 1.1);
         } else if (heroStartTime === 0) {
           continue;
@@ -641,12 +668,16 @@ gsap.registerPlugin(ScrollTrigger);
         context.restore();
       }
 
-      // Composite video into text glyphs
-      if (heroVideo.readyState >= 2) {
+      // Composite video or poster image into text glyphs
+      var hasVideo = heroVideo.readyState >= 2;
+      var hasPoster = !!(posterImg && posterImg.complete && posterImg.naturalWidth > 0);
+
+      if (hasVideo || hasPoster) {
         context.globalCompositeOperation = 'source-in';
 
-        var vw = heroVideo.videoWidth || 16;
-        var vh = heroVideo.videoHeight || 9;
+        var sourceMedia: CanvasImageSource = hasVideo ? heroVideo : (posterImg as HTMLImageElement);
+        var vw = (hasVideo ? heroVideo.videoWidth : (posterImg as HTMLImageElement).naturalWidth) || 16;
+        var vh = (hasVideo ? heroVideo.videoHeight : (posterImg as HTMLImageElement).naturalHeight) || 9;
         var videoRatio = vw / vh;
         var canvasRatio = cWidth / cHeight;
         var drawW: number, drawH: number, drawX: number, drawY: number;
@@ -664,12 +695,15 @@ gsap.registerPlugin(ScrollTrigger);
           drawY = (cHeight - drawH) / 2;
         }
 
-        context.drawImage(heroVideo, drawX, drawY, drawW, drawH);
+        context.drawImage(sourceMedia, drawX, drawY, drawW, drawH);
         context.globalCompositeOperation = 'source-over';
 
         if (!isCanvasReady) {
-          isCanvasReady = true;
-          heroMask.classList.add('is-canvas-ready');
+          var isMidAnimation = !isAnimDone && heroStartTime > 0 && (now - heroStartTime < 1150);
+          if (!isMidAnimation || skipLoader) {
+            isCanvasReady = true;
+            heroMask.classList.add('is-canvas-ready');
+          }
         }
       }
 
@@ -708,10 +742,13 @@ gsap.registerPlugin(ScrollTrigger);
     window.addEventListener('resize', resizeCanvas);
     if ('fonts' in document) {
       document.fonts.ready.then(function () {
-        resizeCanvas();
+        if (!isAnimDone && heroStartTime > 0 && (performance.now() - heroStartTime < 1200)) {
+          setTimeout(resizeCanvas, 1200);
+        } else {
+          resizeCanvas();
+        }
       });
     }
-    setTimeout(updateMetrics, 1200);
 
     var playPromise = heroVideo.play();
     if (playPromise && playPromise.catch) {

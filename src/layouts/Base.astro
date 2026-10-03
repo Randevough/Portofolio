@@ -180,6 +180,7 @@ const schemaData = {
 try{
   if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)c.push('motion');
   if(window.matchMedia('(hover:hover) and (pointer:fine)').matches)c.push('fine');
+  if(sessionStorage.getItem('rv-visited')==='1')c.push('skip-loader');
 }catch(e){}
 if(c.length)d.className=(d.className+' '+c.join(' ')).trim();})();
 </script>

@@ -79,9 +79,11 @@ html.fine .spot{display:block;}
 /* =================================================================
    REVEAL SYSTEM — the only place hiding happens
    ================================================================= */
-html.motion .hero__line > span{transform:translateY(110%);
+html.motion:not(.skip-loader) .hero__line > span{transform:translateY(110%);
   transition:transform 1.05s var(--ease);transition-delay:var(--d,0ms);}
 html.motion .is-in .hero__line > span{transform:translateY(0);}
+html.skip-loader .hero__line > span{transform:translateY(0) !important;transition:none !important;}
+html.skip-loader .hero [data-fade]{opacity:1 !important;transform:none !important;transition:none !important;}
 
 .word{display:inline-block;overflow:hidden;vertical-align:bottom;
   padding-bottom:.16em;margin-bottom:-.16em;line-height:1.05;}
@@ -112,6 +114,7 @@ html.js-ready .loader{animation:none;}
 @keyframes loaderFailsafe{to{transform:translateY(-100%);visibility:hidden;}}
 .loader.is-out{transform:translateY(-100%);}
 .loader.is-done{display:none;}
+html.skip-loader .loader{display:none !important;}
 
 /* tracking-in: the name arrives by tightening, not by sliding */
 .loader__name{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:600;letter-spacing:-.04em;}
@@ -344,9 +347,10 @@ html.menu-open .navmenu{transform:none;visibility:visible;transition-delay:0s;}
   padding:118px var(--pad) clamp(36px,5vh,52px);display:flex;flex-direction:column;}
 .hero__inner{flex:1;display:flex;flex-direction:column;justify-content:center;
   padding-bottom:clamp(20px,4vh,48px);}
-html.motion:has(.loader) .hero__inner{transform:scale(1.04);transform-origin:50% 38%;
+html.motion:not(.skip-loader):has(.loader) .hero__inner{transform:scale(1.03);transform-origin:50% 50%;
   transition:transform 1.35s var(--ease);}
 html.motion .hero.is-pushed .hero__inner{transform:none;}
+html.skip-loader .hero__inner{transform:none !important;transition:none !important;}
 .hero__eyebrow{color:var(--muted);margin-bottom:clamp(18px,3.4vh,34px);
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .hero__author{color:var(--text);font-weight:500;}
